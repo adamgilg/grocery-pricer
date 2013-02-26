@@ -1,0 +1,8 @@
+<h1>Add Store</h1>
+
+<%= simple_form_for @store do |f| %>
+  <%= f.input :name %>
+  <%= f.input :address %>
+  <%= f.input :description, as: :text, class: "store-description-field" %>
+  <%= f.button :submit %>
+<% end %>

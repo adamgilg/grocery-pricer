@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130223011736) do
+ActiveRecord::Schema.define(:version => 20130225180422) do
 
   create_table "product_reviews", :force => true do |t|
     t.integer  "product_id"
@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(:version => 20130223011736) do
     t.boolean  "verified",   :default => false
     t.datetime "created_at",                    :null => false
     t.datetime "updated_at",                    :null => false
+    t.integer  "price"
   end
 
   create_table "store_reviews", :force => true do |t|

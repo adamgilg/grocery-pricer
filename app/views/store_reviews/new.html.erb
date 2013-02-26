@@ -1,0 +1,12 @@
+<h1>Review <%= @store_review.store.name %></h1>
+<h3><%= @store_review.store.address %></h3>
+
+<%= simple_form_for @store_review do |f| %>
+  <!-- remove this once auth is implemented -->
+  <%= f.association :user %>
+  <%= f.input :store_id, as: :hidden, input: { value: @store_review.store.id } %>
+  <%= f.input :rating, as: :radio_buttons, collection: 1..7 %>
+  <%= f.input :body, as: :text %>
+  <%= f.button :submit %>
+
+<% end %>

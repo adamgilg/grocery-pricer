@@ -1,0 +1,9 @@
+<h1><%= @product.name %></h1>
+<div class="product-brand">
+  <%= @product.brand %>
+</div>
+<div class="product-description">
+  <%= @product.description %>
+</div>
+
+<%= link_to "Add to a store", new_product_store_product_path(@product) %>

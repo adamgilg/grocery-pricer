@@ -1,0 +1,18 @@
+<h1><%= @store.name %></h1>
+
+<div class="store-info">
+  <%= @store.address %>
+</div>
+Average review: <%= average_rating %>
+<br>
+<%= link_to "Review this store", new_store_store_review_path(@store) %>
+
+<%= link_to "Add a product", new_store_store_product_path(@store), class: "btn btn-add-store-product" %>
+
+<div class="store-products">
+  <ul>
+    <% @store.store_products.each do |store_product| %>
+      <li><%= "#{store_product.product.name} (#{store_product.product.brand}): #{store_product.price}" %></li>
+    <% end %>
+  </ul>
+</div>

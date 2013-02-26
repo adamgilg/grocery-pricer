@@ -1,0 +1,11 @@
+<h1>All Stores</h1>
+<ol>
+  <% @stores.each do |store| %>
+    <li>
+      <h3><%= link_to store.name, store_path(store) %></h3>
+      <%= store.address %>
+      <br>
+      Average rating: <%= average_rating(store)  %>
+    </li>
+  <% end %>
+</ol>
