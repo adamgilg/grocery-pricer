@@ -5,7 +5,7 @@
       <h3><%= link_to store.name, store_path(store) %></h3>
       <%= store.address %>
       <br>
-      Average rating: <%= average_rating(store)  %>
+      Average rating: <%= store.average_rating  %>
     </li>
   <% end %>
 </ol>

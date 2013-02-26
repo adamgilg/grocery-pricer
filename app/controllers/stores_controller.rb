@@ -1,8 +1,6 @@
 class StoresController < ApplicationController
-  include StoresHelper
   def show
     @store = Store.find(params[:id])
-    # @average_rating = @store.store_reviews.average('rating').to_f
   end
 
   def index
@@ -23,9 +21,4 @@ class StoresController < ApplicationController
       render 'new'
     end
   end
-
-  # def average_rating(store)
-  #   rated_store = Store.find(store.id)
-  #   rated_store.store_reviews.average('rating').to_f
-  # end
 end

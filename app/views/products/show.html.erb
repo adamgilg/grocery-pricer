@@ -5,5 +5,9 @@
 <div class="product-description">
   <%= @product.description %>
 </div>
-
+<div class="average-rating">
+  Average rating: <%= @product.average_rating %>
+</div>
+<%= link_to "Rate this product", new_product_product_review_path(@product) %>
 <%= link_to "Add to a store", new_product_store_product_path(@product) %>
+<%= render partial: "/shared/reviews", locals: { element: @product } %>

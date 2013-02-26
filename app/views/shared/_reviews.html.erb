@@ -1,0 +1,18 @@
+<ol class="reviews">
+  <% element.reviews.each do |review| %>
+    <li>
+      <article class="review">
+        <header>Rating: <%= review.rating %>/7</header>
+        <p><%= review.body %></p>
+        <footer>
+          <p>Submitted by: <%= review.user.name %></p>
+          <p>Created <%= time_ago_in_words(review.created_at) %> ago</p>
+        </footer>
+      </article>
+    </li>
+  <% end %>
+</ol>
+
+
+
+

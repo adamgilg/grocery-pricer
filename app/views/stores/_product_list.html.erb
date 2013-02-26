@@ -1,0 +1,7 @@
+<div class="store-products">
+  <ul>
+    <% store.store_products.each do |store_product| %>
+      <li><%= link_to "#{store_product.product.name} (#{store_product.product.brand}): #{store_product.price}", product_path(store_product.product_id) %></li>
+    <% end %>
+  </ul>
+</div>

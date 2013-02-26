@@ -3,11 +3,15 @@ class Store < ActiveRecord::Base
   has_many :store_products
   has_many :products, through: :store_products
 
-  has_many :store_reviews
+  has_many :reviews, class_name: "StoreReview"
 
   validates :name, presence: true
   validates :address, presence: true
 
   validates :name, uniqueness: { scope: :address }
+
+  def average_rating
+    self.reviews.average('rating').to_f
+  end
 
 end
