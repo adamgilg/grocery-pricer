@@ -2,7 +2,7 @@ class StoresController < ApplicationController
   include StoresHelper
   def show
     @store = Store.find(params[:id])
-    @average_rating = @store.store_reviews.average('rating').to_f
+    # @average_rating = @store.store_reviews.average('rating').to_f
   end
 
   def index

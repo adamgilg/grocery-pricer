@@ -3,7 +3,9 @@
 <div class="store-info">
   <%= @store.address %>
 </div>
-Average review: <%= average_rating %>
+Average review: <%= average_rating(@store) %>
+<br>
+<%= link_to "See what other people have to say about #{@store.name}", store_store_reviews_path(@store) %>
 <br>
 <%= link_to "Review this store", new_store_store_review_path(@store) %>
 
