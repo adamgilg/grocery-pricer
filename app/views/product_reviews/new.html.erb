@@ -1,9 +1,8 @@
-<h1>Review <%= @product_review.product.name %><h1>
+<h1>Review <%= @product_review.product.name %></h1>
 
 <%= simple_form_for @product_review do |f| %>
-<!-- the line below makes this break. why? -->
-  <%= f.input :user_id, as: :hidden, input: { value: current_user.id } %>
-  <%= f.input :product_id, as: :hidden, input: { value: @product_review.product.id } %>
+
+  <%= f.input :product_id, as: :hidden %>
   <%= f.input :rating, as: :radio_buttons, collection: 1..7 %>
   <%= f.input :body, as: :text %>
   <%= f.button :submit %>

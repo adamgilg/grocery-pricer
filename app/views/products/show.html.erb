@@ -1,13 +1,31 @@
 <h1><%= @product.name %></h1>
 <div class="product-brand">
-  <%= @product.brand %>
+  Brand: <%= @product.brand %>
 </div>
 <div class="product-description">
   <%= @product.description %>
 </div>
 <div class="average-rating">
-  Average rating: <%= @product.average_rating %>
+  Average rating: <%= "#{@product.average_rating} (#{pluralize(@product.reviews.count, 'review')})" %>
 </div>
+<div class="average-price">
+  Average price: <%= "#{@product.average_price} (#{pluralize(@product.store_products.count, 'store')})" %>
+</div>
+
 <%= link_to "Rate this product", new_product_product_review_path(@product) %>
 <%= link_to "Add to a store", new_product_store_product_path(@product) %>
-<%= render partial: "/shared/reviews", locals: { element: @product } %>
+
+<div class="product-reviews-list">
+  <%= render partial: "/shared/reviews", locals: { element: @product } %>
+</div>
+
+<div class="product-stores-list">
+  <ul>
+    <strong>Sold in these stores:</strong>
+      <% @product.stores.each do |store| %>
+        <li>
+          <%= link_to "#{store.name} (#{store.address})", store_path(store) %>
+        </li>
+    <% end %>
+  </ul>
+</div>

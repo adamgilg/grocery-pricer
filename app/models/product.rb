@@ -9,4 +9,12 @@ class Product < ActiveRecord::Base
   def average_rating
     self.reviews.average('rating').to_f
   end
+
+  def average_price
+    self.store_products.average('price')
+  end
+
+  def converted_price
+    #convert price in cents to dollars & cents
+  end
 end
