@@ -17,4 +17,8 @@ class Product < ActiveRecord::Base
   def converted_price
     #convert price in cents to dollars & cents
   end
+
+  def name_and_brand
+    "#{self.name} | #{self.brand}"
+  end
 end
