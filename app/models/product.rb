@@ -11,11 +11,14 @@ class Product < ActiveRecord::Base
   end
 
   def average_price
-    self.store_products.average('price')
+    self.store_products.average('price').to_i
   end
 
-  def converted_price
-    #convert price in cents to dollars & cents
+#this should live somewhere else - doesn't make sense to base it on price
+  def convert_price(value)
+    cents = value % 100
+    dollars = value / 100
+    "$#{dollars}.#{cents}"
   end
 
   def name_and_brand

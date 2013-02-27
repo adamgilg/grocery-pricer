@@ -1,7 +1,50 @@
 <div class="store-products">
   <ul>
     <% store.store_products.each do |store_product| %>
-      <li><%= link_to "#{store_product.product.name} (#{store_product.product.brand}): #{store_product.price}", product_path(store_product.product_id) %></li>
+      <li class="store-product"><%= link_to "#{store_product.product.name}
+        (#{store_product.product.brand})", product_path(store_product.product_id) %></li>
+        <ul class="store-product-details <%= 'available' if store_product.availability%>">
+          <li>
+            Price: <%= "#{store_product.price}
+              (Average at #{pluralize(store_product.product.stores.count, 'store')}:
+              #{store_product.product.average_price})" %>
+          </li>
+          <li>
+            <span class="available-text">
+              Available as of <%= store_product.updated_at.to_date %>
+            </span>
+            <span class="unavailable-text">
+              Unavailable as of <%= store_product.updated_at.to_date %>
+            </span>
+          </li>
+
+
+          <li class="buttons">
+            Is this product currently available?
+            <%= button_to('Yes',
+              store_store_product_path(store, store_product),
+              method: :put,
+              remote: true,
+              form_class: "toggle-availability make-available")
+              %>
+
+            <%= button_to('No',
+              store_store_product_path(store, store_product),
+              method: :put,
+              remote: true,
+              form_class: "toggle-availability make-unavailable")
+              %>
+          </li>
+        </ul>
     <% end %>
   </ul>
 </div>
+
+<script>
+$(function() {
+  $(".toggle-availability").on("ajax:success", function(event, data, status, xhr){
+    var form = $(this);
+    form.closest(".store-product-details").toggleClass("available");
+  });
+})
+</script>
