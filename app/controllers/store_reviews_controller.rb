@@ -7,10 +7,10 @@ class StoreReviewsController < ApplicationController
   def create
     @store_review = StoreReview.new(params[:store_review])
     if @store_review.save
-      flash[:success] = "store review successfully saved"
+      flash[:notice] = "store review successfully saved"
       redirect_to store_path(@store_review.store_id)
     else
-      flash[:error] = "failed to save store review"
+      flash[:alert] = "failed to save store review"
       render 'new'
     end
   end

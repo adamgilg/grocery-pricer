@@ -8,10 +8,10 @@ class StoreProductsController < ApplicationController
   def create
     @store_product = StoreProduct.new(params[:store_product])
     if @store_product.save
-      flash[:success] = "store/product association successfully saved"
+      flash[:notice] = "store/product association successfully saved"
       redirect_to root_url
     else
-      flash[:error]
+      flash[:alert]
       render 'new'
     end
   end

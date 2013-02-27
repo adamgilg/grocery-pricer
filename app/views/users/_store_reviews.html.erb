@@ -1,0 +1,18 @@
+<ol class="reviews">
+
+  <% stores.each do |review| %>
+    <li>
+      <article class="review">
+        <header>
+          <h4><%= link_to review.store.name, store_path(review.store) %></h4>
+          <p><%= review.store.address %></p>
+        </header>
+        <p>Rated <%= review.rating %>/7</p>
+        <p><%= review.body %></p>
+        <footer>
+          <p>Created <%= time_ago_in_words(review.created_at) %> ago</p>
+        </footer>
+      </article>
+    </li>
+    <% end %>
+</ol>

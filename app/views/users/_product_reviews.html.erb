@@ -1,0 +1,17 @@
+<ol class="reviews">
+
+  <% products.each do |review| %>
+    <li>
+      <article class="review">
+        <header>
+          <h4><%= link_to "#{review.product.name} (#{review.product.brand})", product_path(review.product) %></h4>
+        </header>
+        <p>Rated <%= review.rating %>/7</p>
+        <p><%= review.body %></p>
+        <footer>
+          <p>Created <%= time_ago_in_words(review.created_at) %> ago</p>
+        </footer>
+      </article>
+    </li>
+    <% end %>
+</ol>

@@ -6,7 +6,7 @@
         <p><%= review.body %></p>
         <footer>
           <p>Submitted by: <%= review.user.name %></p>
-          <p>Created <%= time_ago_in_words(review.created_at) %> ago</p>
+          <p>Added <%= time_ago_in_words(review.created_at) %> ago</p>
         </footer>
       </article>
     </li>

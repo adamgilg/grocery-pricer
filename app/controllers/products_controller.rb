@@ -6,10 +6,10 @@ class ProductsController < ApplicationController
   def create
     @product = Product.new(params[:product])
     if @product.save
-      flash[:success] = "Product successfully saved"
+      flash[:notice] = "Product successfully saved"
       redirect_to products_path
     else
-      flash[:error] = "Problem saving product"
+      flash[:alert] = "Problem saving product"
       render 'new'
     end
   end

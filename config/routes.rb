@@ -1,4 +1,6 @@
 GroceryPricer::Application.routes.draw do
+  devise_for :users
+
   resources :stores do
     resources :store_products, only: [:index, :new]
     resources :store_reviews, only: [:index, :new]

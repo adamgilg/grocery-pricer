@@ -14,10 +14,10 @@ class StoresController < ApplicationController
   def create
     @store = Store.new(params[:store])
     if @store.save
-      flash[:success] = "Store successfully saved"
+      flash[:notice] = "Store successfully saved"
       redirect_to root_path
     else
-      flash[:error] = "Problem saving store"
+      flash[:alert] = "Problem saving store"
       render 'new'
     end
   end

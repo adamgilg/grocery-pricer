@@ -6,11 +6,12 @@ class ProductReviewsController < ApplicationController
 
   def create
     @product_review = ProductReview.new(params[:product_review])
+    @product_review.user_id = current_user.id
     if @product_review.save
-      flash[:success] = "product review successfully saved"
+      flash[:notice] = "product review successfully saved"
       redirect_to product_path(@product_review.product_id)
     else
-      flash[:error] = "failed to save store review"
+      flash[:alert] = "failed to save store review"
       render 'new'
     end
   end
