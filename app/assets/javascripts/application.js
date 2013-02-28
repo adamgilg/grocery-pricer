@@ -15,11 +15,15 @@
 //= require_tree .
 
 $(function() {
-  $(".add-to-list-btn > form").on('ajax:success', function(event, data) {
+  $(".add-to-list-btn > form").on("ajax:success", function(event, data) {
     $(".shopping-list-container").html(data);
   });
 
-  $(".shopping-list-container").on('ajax:success', ".remove-from-list-btn", function(event, data) {
+  $(".shopping-list-container").on("ajax:success", ".remove-from-list-btn", function(event, data) {
+    $(".shopping-list-container").html(data);
+  });
+
+  $(".shopping-list-container").on("ajax:success", ".remove-all-from-list-btn", function(event, data) {
     $(".shopping-list-container").html(data);
   });
 })

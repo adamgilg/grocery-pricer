@@ -18,6 +18,7 @@ module ApplicationHelper
     return product_counts
   end
 
+  #adds to current_user's shopping list
   def add_to_list(product)
     button_to("Add to shopping list",
       user_products_path(product_id: product.id),
@@ -25,7 +26,8 @@ module ApplicationHelper
       remote: true)
   end
 
-  def remove_from_list(product)
+  #removes single instance of an item from current_user's shopping list
+  def remove_one_from_list_btn(product)
     user_product = UserProduct.where(product_id: product.id, user_id: current_user.id).last
     button_to("Remove one",
       user_product_path(user_product.id),
@@ -34,7 +36,12 @@ module ApplicationHelper
       form_class: "btn remove-from-list-btn")
   end
 
-  def remove_all(product)
-    #
+  #removes all of one user's item from shopping list
+  def remove_all_btn(product)
+    button_to("Remove all",
+      remove_from_list_product_path(product),
+      method: :delete,
+      remote: true,
+      form_class: "btn remove-all-from-list-btn")
   end
 end

@@ -9,10 +9,31 @@
 
 <%= link_to "Add a product", new_store_store_product_path(@store), class: "btn btn-add-store-product" %>
 
-<div class="store-product-list">
-  <%= render partial: 'product_list', locals: { store: @store } %>
-</div>
+<div id="page-content">
+  <div class="page-view-tabs-container">
+    <a href="#store-reviews-list">Reviews</a>
+    <a href="#store-products-list">Products</a>
+    <a href="#nonexistant">Directions</a>
+  </div>
 
-<div class="store-reviews-list">
-  <%= render partial: "/shared/reviews", locals: { element: @store } %>
+  <div id="store-products-list" class="page-item">
+    <%= render partial: 'product_list', locals: { store: @store } %>
+  </div>
+
+  <div id="store-reviews-list" class="page-item">
+    <%= render partial: "/shared/reviews", locals: { element: @store } %>
+  </div>
+
+  <script>
+    $(function() {
+      $(".page-view-tabs-container > a").click(function() {
+        $(".page-view-tabs-container > a").removeClass("active");
+        $(this).addClass("active");
+        var href = $(this).attr("href");
+        $(".page-item").hide();
+        $(href).show();
+      })
+      $(".page-view-tabs-container > a:first").click();
+    })
+  </script>
 </div>

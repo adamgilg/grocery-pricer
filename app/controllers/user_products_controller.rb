@@ -36,8 +36,4 @@ class UserProductsController < ApplicationController
     end
   end
 
-  def destroy_all
-
-  end
-
 end

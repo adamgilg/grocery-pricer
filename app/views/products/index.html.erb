@@ -1,15 +1,12 @@
 <h1>Products</h1>
 <%= link_to "Add a new product", new_product_path %>
-<ol>
+<ul class="products-list">
   <% @products.each do |product| %>
     <li>
       <%= link_to product.name, product_path(product) %>
-      <dl>
-        <dt>Brand:</dt>
-        <dd><%= product.brand %></dd>
-        <dt>Description:</dt>
-        <dd><%= product.description %></dd>
-      </dl>
+        <p>Brand: <%= product.brand %></p>
+        <p><%= product.description %></p>
+        <div class="add-to-list-btn"><%= add_to_list(product) %></div>
     </li>
   <% end %>
-</ol>
+</ul>

@@ -19,17 +19,41 @@
 <%= link_to "Rate this product", new_product_product_review_path(@product) %>
 <%= link_to "Add to a store", new_product_store_product_path(@product) %>
 
-<div class="product-reviews-list">
-  <%= render partial: "/shared/reviews", locals: { element: @product } %>
-</div>
-
-<div class="product-stores-list">
-  <ul>
-    <strong>Sold in these stores:</strong>
-      <% @product.stores.each do |store| %>
-        <li>
-          <%= link_to "#{store.name} (#{store.address})", store_path(store) %>
-        </li>
+<div id="page-content">
+  <div class="page-view-tabs-container">
+    <a href="#product-reviews-list">Reviews</a>
+    <a href="#product-stores-list">Stores</a>
+    <% if current_user %>
+    <!-- perhaps change this for not just current user - no address column in user table -->
+      <a href="#nonexistant">Near me</a>
     <% end %>
-  </ul>
+  </div>
+
+  <div id="product-reviews-list" class="page-item">
+    <%= render partial: "/shared/reviews", locals: { element: @product } %>
+  </div>
+
+  <div id="product-stores-list" class="page-item">
+    <ul>
+      <strong>Sold in these stores:</strong>
+        <% @product.stores.each do |store| %>
+          <li>
+            <%= link_to "#{store.name} (#{store.address})", store_path(store) %>
+          </li>
+      <% end %>
+    </ul>
+  </div>
+
+  <script>
+    $(function() {
+      $(".page-view-tabs-container > a").click(function() {
+        $(".page-view-tabs-container").removeClass("active");
+        $(this).addClass("active");
+        var href = $(this).attr("href");
+        $(".page-item").hide();
+        $(href).show();
+      })
+      $(".page-view-tabs-container > a:first").click();
+    })
+  </script>
 </div>

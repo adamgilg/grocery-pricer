@@ -35,16 +35,17 @@
               form_class: "toggle-availability make-unavailable")
               %>
           </li>
+          <div class="add-to-list-btn"><%= add_to_list(store_product.product) %></div>
         </ul>
     <% end %>
   </ul>
 </div>
 
 <script>
-$(function() {
-  $(".toggle-availability").on("ajax:success", function(event, data, status, xhr){
-    var form = $(this);
-    form.closest(".store-product-details").toggleClass("available");
-  });
-})
+  $(function() {
+    $(".toggle-availability").on("ajax:success", function(event, data, status, xhr){
+      var form = $(this);
+      form.closest(".store-product-details").toggleClass("available");
+    });
+  })
 </script>
