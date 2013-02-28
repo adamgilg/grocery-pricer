@@ -13,3 +13,13 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
+
+$(function() {
+  $(".add-to-list-btn > form").on('ajax:success', function(event, data) {
+    $(".shopping-list-container").replaceWith(data);
+  });
+
+  $(".remove-from-list-btn").on('ajax:success', function(event, data) {
+    $(".shopping-list-container").replaceWith(data);
+  });
+})

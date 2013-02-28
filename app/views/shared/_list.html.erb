@@ -6,6 +6,7 @@
         Quantity: <%= count %>
         (avg price: <%= format_price(product.average_price) %>)
       </p>
+      <%= remove_from_list(product) %>
     <% end %>
   </div>
 </div>

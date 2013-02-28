@@ -8,7 +8,7 @@ module ApplicationHelper
 
   def user_products_count(user)
     product_counts = {}
-    user.products.each do |prod|
+    user.products.all.each do |prod|
       if product_counts[prod]
         product_counts[prod] += 1
       else
@@ -22,7 +22,15 @@ module ApplicationHelper
     button_to("Add to shopping list",
       user_products_path(product_id: product.id),
       method: :post,
-      remote: true
-    )
+      remote: true)
+  end
+
+  def remove_from_list(product)
+
+    button_to("Remove",
+      user_product_path(user_product.id),
+      method: :delete,
+      remote: true,
+      form_class: "btn remove-from-list-btn")
   end
 end
