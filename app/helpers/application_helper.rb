@@ -26,11 +26,15 @@ module ApplicationHelper
   end
 
   def remove_from_list(product)
-
-    button_to("Remove",
+    user_product = UserProduct.where(product_id: product.id, user_id: current_user.id).last
+    button_to("Remove one",
       user_product_path(user_product.id),
       method: :delete,
       remote: true,
       form_class: "btn remove-from-list-btn")
+  end
+
+  def remove_all(product)
+    #
   end
 end

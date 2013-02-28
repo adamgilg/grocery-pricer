@@ -1,12 +1,12 @@
-<div class="shopping-list-container">
-  <div class="shopping-list">
-    <% user_products_count(current_user).each do |product, count| %>
-      <p>
-        <%= product.name %> |
-        Quantity: <%= count %>
-        (avg price: <%= format_price(product.average_price) %>)
-      </p>
-      <%= remove_from_list(product) %>
-    <% end %>
-  </div>
+
+<div class="shopping-list">
+  <% user_products_count(current_user).each do |product, count| %>
+    <p>
+      <%= product.name %> |
+      Quantity: <%= count %>
+      (avg price: <%= format_price(product.average_price) %>)
+    </p>
+    <%= remove_from_list(product) %>
+  <% end %>
 </div>
+

@@ -26,10 +26,18 @@ class UserProductsController < ApplicationController
 
     user_product = UserProduct.find(params[:id])
     if user_product.destroy
-      render "shared/_list", layout: false
+      if request.xhr?
+        render "shared/_list", layout: false
+      else
+        redirect_to :back
+      end
     else
       render nothing: true, status: 500
     end
+  end
+
+  def destroy_all
+
   end
 
 end

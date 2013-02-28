@@ -16,10 +16,10 @@
 
 $(function() {
   $(".add-to-list-btn > form").on('ajax:success', function(event, data) {
-    $(".shopping-list-container").replaceWith(data);
+    $(".shopping-list-container").html(data);
   });
 
-  $(".remove-from-list-btn").on('ajax:success', function(event, data) {
-    $(".shopping-list-container").replaceWith(data);
+  $(".shopping-list-container").on('ajax:success', ".remove-from-list-btn", function(event, data) {
+    $(".shopping-list-container").html(data);
   });
 })

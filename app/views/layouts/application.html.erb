@@ -20,8 +20,9 @@
   <%= link_to "sign up", new_user_registration_path %>
 <% end %>
 
-<%= render partial: "shared/list" if current_user %>
-
+<div class="shopping-list-container">
+  <%= render partial: "shared/list" if current_user %>
+</div>
 <%= yield %>
 
 </body>
