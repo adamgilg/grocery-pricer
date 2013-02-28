@@ -20,7 +20,7 @@
   <%= link_to "sign up", new_user_registration_path %>
 <% end %>
 
-<%= render partial: "shared/list" %>
+<%= render partial: "shared/list" if current_user %>
 
 <%= yield %>
 
