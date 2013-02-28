@@ -11,8 +11,10 @@ GroceryPricer::Application.routes.draw do
     resources :product_reviews, only: :new
   end
 
-  resources :store_products
   resources :users
+
+  resources :user_products
+  resources :store_products
   resources :store_reviews
   resources :product_reviews
 

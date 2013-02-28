@@ -13,4 +13,6 @@ class User < ActiveRecord::Base
 
   has_many :product_reviews
   has_many :store_reviews
+  has_many :user_products
+  has_many :products, through: :user_products
 end

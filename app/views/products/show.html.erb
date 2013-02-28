@@ -9,8 +9,9 @@
   Average rating: <%= "#{@product.average_rating} (#{pluralize(@product.reviews.count, 'review')})" %>
 </div>
 <div class="average-price">
-  Average price: <%= "#{@product.average_price} (#{pluralize(@product.store_products.count, 'store')})" %>
+  Average price: <%= "#{format_price(@product.average_price)} (#{pluralize(@product.store_products.count, 'store')})" %>
 </div>
+<%= add_to_list(@product) %>
 
 <%= link_to "Rate this product", new_product_product_review_path(@product) %>
 <%= link_to "Add to a store", new_product_store_product_path(@product) %>

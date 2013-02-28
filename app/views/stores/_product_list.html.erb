@@ -5,9 +5,9 @@
         (#{store_product.product.brand})", product_path(store_product.product_id) %></li>
         <ul class="store-product-details <%= 'available' if store_product.availability%>">
           <li>
-            Price: <%= "#{store_product.price}
+            Price: <%= "#{format_price(store_product.price)}
               (Average at #{pluralize(store_product.product.stores.count, 'store')}:
-              #{store_product.product.average_price})" %>
+              #{format_price(store_product.product.average_price)})" %>
           </li>
           <li>
             <span class="available-text">
