@@ -13,7 +13,11 @@
 </div>
 
 <div class="add-to-list-btn">
-  <%= add_to_list(@product) %>
+  <% if current_user.products.include?(@product) %>
+    <%= change_item_quantity(@product, 1) %>
+  <% else %>
+    <%= add_to_list(@product) %>
+  <% end %>
 </div>
 
 <%= link_to "Rate this product", new_product_product_review_path(@product) %>

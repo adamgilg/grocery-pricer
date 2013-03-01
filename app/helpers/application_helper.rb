@@ -6,17 +6,17 @@ module ApplicationHelper
     "$#{dollars}.#{cents}"
   end
 
-  def user_products_count(user)
-    product_counts = {}
-    user.products.all.each do |prod|
-      if product_counts[prod]
-        product_counts[prod] += 1
-      else
-        product_counts[prod] = 1
-      end
-    end
-    return product_counts
-  end
+  # def user_products_count(user)
+  #   product_counts = {}
+  #   user.products.all.each do |prod|
+  #     if product_counts[prod]
+  #       product_counts[prod] += 1
+  #     else
+  #       product_counts[prod] = 1
+  #     end
+  #   end
+  #   return product_counts
+  # end
 
   #adds to current_user's shopping list
   def add_to_list(product)
@@ -24,6 +24,13 @@ module ApplicationHelper
       user_products_path(product_id: product.id),
       method: :post,
       remote: true)
+  end
+
+  def change_item_quantity(product, change)
+    button_to("Add another",
+      user_product_path(product_id: product.id, change: change),
+      remote: true,
+      method: :put)
   end
 
   #removes single instance of an item from current_user's shopping list
