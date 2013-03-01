@@ -1,18 +1,35 @@
 <h1><%= @user.name %></h1>
-<div class="user-product-reviews">
-  <h3><%= "#{@user.name}'s product reviews" %></h3>
-  <% if @user.product_reviews.length > 0 %>
-    <%= render partial: "product_reviews", locals: { products: @user.product_reviews } %>
-  <% else %>
-      <em><%= @user.name %> has no product reviews yet<em>
-    <% end %>
-</div>
 
-<div class="user-store-reviews">
-  <h3><%= "#{@user.name}'s store reviews" %></h3>
-  <% if @user.store_reviews.length > 0 %>
-    <%= render partial: "store_reviews", locals: { stores: @user.store_reviews } %>
-  <% else %>
-    <em><%= @user.name %> has no store reviews yet<em>
-  <% end %>
+<div id="page-content">
+  <div class="page-view-tabs-container">
+    <a href="#user-store-reviews">Store reviews</a>
+    <a href="#user-product-reviews">Product reviews</a>
+    <% if current_user == @user %>
+      <a href="#user-shopping-list">Shopping list</a>
+    <% end %>
+  </div>
+
+  <div id="user-store-reviews" class="page-item">
+    <h3><%= "#{@user.name}'s store reviews" %></h3>
+    <% if @user.store_reviews.length > 0 %>
+      <%= render partial: "store_reviews", locals: { stores: @user.store_reviews } %>
+    <% else %>
+      <em><%= @user.name %> has no store reviews yet</em>
+    <% end %>
+  </div>
+
+  <div id="user-product-reviews" class="page-item">
+    <h3><%= "#{@user.name}'s product reviews" %></h3>
+    <% if @user.product_reviews.length > 0 %>
+      <%= render partial: "product_reviews", locals: { products: @user.product_reviews } %>
+    <% else %>
+      <em><%= @user.name %> has no product reviews yet</em>
+    <% end %>
+  </div>
+
+  <div id="user-shopping-list" class="page-item">
+    <h3><%= "#{@user.name}'s shopping list" %></h3>
+    <%= render partial: "shopping_list" %>
+  </div>
+
 </div>

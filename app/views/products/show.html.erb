@@ -44,16 +44,4 @@
     </ul>
   </div>
 
-  <script>
-    $(function() {
-      $(".page-view-tabs-container > a").click(function() {
-        $(".page-view-tabs-container").removeClass("active");
-        $(this).addClass("active");
-        var href = $(this).attr("href");
-        $(".page-item").hide();
-        $(href).show();
-      })
-      $(".page-view-tabs-container > a:first").click();
-    })
-  </script>
 </div>

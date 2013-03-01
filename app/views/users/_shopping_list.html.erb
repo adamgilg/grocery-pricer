@@ -1,0 +1,9 @@
+<ol>
+  <% user_products_count(current_user).each do |product, count| %>
+    <li>
+      <%= "#{product.name} | #{count}" %>
+      <%= simple_form_for @user_product do |f| %>
+      <% end %>
+    </li>
+  <% end %>
+</ol>
