@@ -35,6 +35,11 @@ $(function() {
     $(".page-item").hide();
     var href = $(this).attr("href");
     $(href).show();
-  })
+  });
   $(".page-view-tabs-container > a:first").click();
+
+  // manages shopping list quantity changes
+  $(".change-user-product-quantity").change(function() {
+    $(this).closest('form').submit();
+  })
 })
