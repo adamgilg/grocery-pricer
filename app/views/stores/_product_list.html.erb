@@ -5,8 +5,12 @@
         (#{store_product.product.brand})", product_path(store_product.product_id) %></li>
         <ul class="store-product-details <%= 'available' if store_product.availability%>">
           <li>
-            Price: <%= "#{format_price(store_product.price)}
-              (Average at #{pluralize(store_product.product.stores.count, 'store')}:
+            <% if store_product.price %>
+              Price: <%= format_price(store_product.price) %>
+            <% else %>
+              Price information not available at this store.
+            <% end %>
+              <%= "(Average at #{pluralize(store_product.product.stores.count, 'store')}:
               #{format_price(store_product.product.average_price)})" %>
           </li>
           <li>
@@ -35,7 +39,16 @@
               form_class: "toggle-availability make-unavailable")
               %>
           </li>
-          <div class="add-to-list-btn"><%= add_to_list(store_product.product) %></div>
+          <% if current_user %>
+            <div class="add-to-list-btn">
+              <% if current_user.products.include?(store_product.product) %>
+                <%= change_item_quantity(store_product.product, 1, "Add another") %>
+              <% else %>
+                <%= add_to_list(store_product.product) %>
+              <% end %>
+            </div>
+          <% end %>
+
         </ul>
     <% end %>
   </ul>

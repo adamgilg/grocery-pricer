@@ -26,8 +26,8 @@ module ApplicationHelper
       remote: true)
   end
 
-  def change_item_quantity(product, change)
-    button_to("Add another",
+  def change_item_quantity(product, change, btn_text)
+    button_to(btn_text,
       user_product_path(product_id: product.id, change: change),
       remote: true,
       method: :put)

@@ -3,7 +3,11 @@
   <% current_user.user_products.each do |user_prod| %>
     <p>
       <%= link_to user_prod.product.name, product_path(user_prod.product) %> |
-      Quantity: <%= user_prod.quantity %>
+      Quantity: 
+      <%= simple_form_for user_prod do |f| %>
+        <%= f.input :quantity %>
+        <%= f.submit %>
+      <% end %>
       (avg price: <%= format_price(user_prod.product.average_price) %>)
     </p>
 

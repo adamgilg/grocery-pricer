@@ -1,8 +1,9 @@
 <ol>
-  <% user_products_count(current_user).each do |product, count| %>
+  <% current_user.user_products.each do |user_prod| %>
     <li>
-      <%= "#{product.name} | #{count}" %>
-      <%= simple_form_for @user_product do |f| %>
+      <%= "#{user_prod.product.name} | #{user_prod.quantity}" %>
+      <%= simple_form_for user_prod do |f| %>
+        <%= f.association :store, label_method: :location_and_price %>
       <% end %>
     </li>
   <% end %>

@@ -9,9 +9,9 @@ class UserProductsController < ApplicationController
   end
 
   def create
-    product = Product.find(params[:product_id])
-    user_product = UserProduct.new(product_id: product.id, user_id: current_user.id)
-    user_product.quantity = 1
+    # product = Product.find(params[:product_id])
+    user_product = UserProduct.new(product_id: params[:product_id], user_id: current_user.id)
+    # user_product.quantity = 1
     if user_product.save
       if request.xhr?
         render 'shared/_list', layout: false

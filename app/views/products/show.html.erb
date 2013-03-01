@@ -1,24 +1,28 @@
-<h1><%= @product.name %></h1>
-<div class="product-brand">
-  Brand: <%= @product.brand %>
-</div>
-<div class="product-description">
-  <%= @product.description %>
-</div>
-<div class="average-rating">
-  Average rating: <%= "#{@product.average_rating} (#{pluralize(@product.reviews.count, 'review')})" %>
-</div>
-<div class="average-price">
-  Average price: <%= "#{format_price(@product.average_price)} (#{pluralize(@product.store_products.count, 'store')})" %>
+<div id="product-info-container">
+  <h1><%= @product.name %></h1>
+  <div class="product-brand">
+    Brand: <%= @product.brand %>
+  </div>
+  <div class="product-description">
+    <%= @product.description %>
+  </div>
+  <div class="average-rating">
+    Average rating: <%= "#{@product.average_rating} (#{pluralize(@product.reviews.count, 'review')})" %>
+  </div>
+  <div class="average-price">
+    Average price: <%= "#{format_price(@product.average_price)} (#{pluralize(@product.store_products.count, 'store')})" %>
+  </div>
 </div>
 
-<div class="add-to-list-btn">
-  <% if current_user.products.include?(@product) %>
-    <%= change_item_quantity(@product, 1) %>
-  <% else %>
-    <%= add_to_list(@product) %>
-  <% end %>
-</div>
+<% if current_user %>
+  <div class="add-to-list-btn">
+    <% if current_user.products.include?(@product) %>
+      <%= change_item_quantity(@product, 1, "Add another") %>
+    <% else %>
+      <%= add_to_list(@product) %>
+    <% end %>
+  </div>
+<% end %>
 
 <%= link_to "Rate this product", new_product_product_review_path(@product) %>
 <%= link_to "Add to a store", new_product_store_product_path(@product) %>
