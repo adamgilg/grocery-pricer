@@ -24,10 +24,9 @@ class UserProductsController < ApplicationController
   end
 
   def update
-    user_product = UserProduct.where(product_id: params[:product_id], user_id: current_user).first
-    p user_product
-    user_product.quantity += params[:change].to_i
-    if user_product.save
+    # make this more standard 'update attributes and save changes'
+    user_product = UserProduct.find(params[:id])
+    if user_product.update_attributes(params[:user_product])
       if request.xhr?
         render 'shared/_list', layout: false
       else
@@ -43,6 +42,20 @@ class UserProductsController < ApplicationController
     if user_product.destroy
       if request.xhr?
         render "shared/_list", layout: false
+      else
+        redirect_to :back
+      end
+    else
+      render nothing: true, status: 500
+    end
+  end
+
+  def increment
+    user_product = UserProduct.where(product_id: params[:product_id], user_id: current_user).first
+    user_product.quantity += params[:change].to_i
+    if user_product.save
+      if request.xhr?
+        render 'shared/_list', layout: false
       else
         redirect_to :back
       end

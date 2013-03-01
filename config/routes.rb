@@ -16,7 +16,11 @@ GroceryPricer::Application.routes.draw do
 
   resources :users
 
-  resources :user_products
+  resources :user_products do
+    member do
+      put :increment
+    end
+  end
 
   resources :store_products
   resources :store_reviews

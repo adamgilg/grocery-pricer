@@ -26,9 +26,9 @@ module ApplicationHelper
       remote: true)
   end
 
-  def change_item_quantity(product, change, btn_text)
+  def increment_user_product_btn(product, change, btn_text)
     button_to(btn_text,
-      user_product_path(product_id: product.id, change: change),
+      increment_user_product_path(product_id: product.id, change: change),
       remote: true,
       method: :put)
   end
@@ -50,5 +50,8 @@ module ApplicationHelper
       method: :delete,
       remote: true,
       form_class: "btn remove-all-from-list-btn")
+  end
+
+  def total_list_price(user)
   end
 end
