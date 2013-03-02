@@ -6,6 +6,7 @@ gem 'rails', '3.2.11'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 group :development do
   gem 'sqlite3'
+  gem 'letter_opener'
 end
 
 group :production do
@@ -28,6 +29,7 @@ end
 gem 'jquery-rails'
 gem 'simple_form'
 gem 'devise'
+gem 'bootstrap-sass', '~> 2.3.0.1'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

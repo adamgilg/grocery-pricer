@@ -2,8 +2,11 @@
   <% current_user.user_products.each do |user_prod| %>
     <li>
       <%= "#{user_prod.product.name} | #{user_prod.quantity}" %>
-      <%= simple_form_for user_prod do |f| %>
-        <%= f.association :store, label_method: :location_and_price %>
+      <%= simple_form_for(user_prod, remote: true) do |f| %>
+        <%= f.association :store_product,
+          collection: StoreProduct.where(product_id: user_prod.product_id),
+          label_method: Proc.new { |store_product| location_and_price(store_product) },
+          wrapper_html: { class: "choose-user-product-store" } %>
       <% end %>
     </li>
   <% end %>

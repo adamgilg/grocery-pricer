@@ -14,7 +14,11 @@ GroceryPricer::Application.routes.draw do
     end
   end
 
-  resources :users
+  resources :users do
+    collection do
+      post :email_shopping_list
+    end
+  end
 
   resources :user_products do
     member do

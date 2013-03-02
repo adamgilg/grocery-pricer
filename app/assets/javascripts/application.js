@@ -36,10 +36,22 @@ $(function() {
     var href = $(this).attr("href");
     $(href).show();
   });
-  $(".page-view-tabs-container > a:first").click();
+  // should only click if none of the tabs have been clicked on previously
+  // if statement below won't work - page loads w/o '.active' on any tabs
+  var hash = window.location.hash;
+  if (hash.length) {
+    $('.page-view-tabs-container > a[href="' + hash + '"]').click();
+  } else {
+    $(".page-view-tabs-container > a:first").click();
+  };
+  //}
 
   // manages shopping list quantity changes
   $(".change-user-product-quantity").change(function() {
+    $(this).closest('form').submit();
+  })
+
+  $(".choose-user-product-store").change(function() {
     $(this).closest('form').submit();
   })
 })

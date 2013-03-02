@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+  </head>
+  <body>
+    <h1>Shopping List</h1>
+    <ol>
+      <% @sorted_list.each do |store_id, products| %>
+        <li>
+          <% store = Store.find(store_id) %>
+          <h3><%= store.name %></h3>
+          <strong><%= store.address %></strong>
+          <ul>
+            <% products.each do |product| %>
+              <li>
+                <%= product.store_product.product.name %>
+                <%= product.quantity %> at <%= format_price(product.store_product.price) %> each.
+              </li>
+            <% end %>
+          </ul>
+        </li>
+      <% end %>
+    </ol>
+  </body>
+</html>
+

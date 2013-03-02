@@ -6,6 +6,10 @@ module ApplicationHelper
     "$#{dollars}.#{cents}"
   end
 
+  def location_and_price(store_prod)
+    "#{store_prod.store.name} (#{store_prod.store.address}) | #{format_price(store_prod.price)}"
+  end
+
   # def user_products_count(user)
   #   product_counts = {}
   #   user.products.all.each do |prod|
@@ -53,5 +57,26 @@ module ApplicationHelper
   # end
 
   def total_list_price(user)
+
+  end
+
+  def sort_list_by_store(user)
+    products_by_store = {}
+    ups = user.user_products.joins(:store_product).order(store_products: :store_id)
+    ups.each do |up|
+      if products_by_store[up.store_product.store_id]
+        products_by_store[up.store_product.store_id] << up
+      else
+        products_by_store[up.store_product.store_id] = [up]
+      end
+    end
+    products_by_store
+  end
+
+  def email_shopping_list
+    button_to("Email list",
+      email_shopping_list_users_path,
+      remote: true,
+      method: :post)
   end
 end
