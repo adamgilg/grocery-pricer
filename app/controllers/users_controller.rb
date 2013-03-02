@@ -9,4 +9,8 @@ class UsersController < ApplicationController
     UserMailer.email_shopping_list(current_user, sort_list_by_store(@current_user)).deliver
     render nothing: true
   end
+
+  def destroy_list
+
+  end
 end

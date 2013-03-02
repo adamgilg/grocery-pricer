@@ -20,13 +20,13 @@ $(function() {
     $(".shopping-list-container").html(data);
   });
 
-  $(".shopping-list-container").on("ajax:success", ".remove-from-list-btn", function(event, data) {
-    $(".shopping-list-container").html(data);
-  });
+  // $(".shopping-list-container").on("ajax:success", ".remove-from-list-btn", function(event, data) {
+  //   $(".shopping-list-container").html(data);
+  // });
 
-  $(".shopping-list-container").on("ajax:success", ".remove-all-from-list-btn", function(event, data) {
-    $(".shopping-list-container").html(data);
-  });
+  // $(".shopping-list-container").on("ajax:success", ".remove-all-from-list-btn", function(event, data) {
+  //   $(".shopping-list-container").html(data);
+  // });
 
   // manages info tabs
   $(".page-view-tabs-container > a").click(function() {
@@ -37,7 +37,6 @@ $(function() {
     $(href).show();
   });
   // should only click if none of the tabs have been clicked on previously
-  // if statement below won't work - page loads w/o '.active' on any tabs
   var hash = window.location.hash;
   if (hash.length) {
     $('.page-view-tabs-container > a[href="' + hash + '"]').click();

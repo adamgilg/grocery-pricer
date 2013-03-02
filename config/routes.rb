@@ -18,6 +18,9 @@ GroceryPricer::Application.routes.draw do
     collection do
       post :email_shopping_list
     end
+    member do
+      delete :destroy_list
+    end
   end
 
   resources :user_products do

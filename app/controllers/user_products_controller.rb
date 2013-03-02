@@ -14,7 +14,7 @@ class UserProductsController < ApplicationController
     # user_product.quantity = 1
     if user_product.save
       if request.xhr?
-        render 'shared/_list', layout: false
+        render 'shared/_sidebar', layout: false
       else
         redirect_to :back
       end
@@ -24,11 +24,11 @@ class UserProductsController < ApplicationController
   end
 
   def update
-    # make this more standard 'update attributes and save changes'
     user_product = UserProduct.find(params[:id])
     if user_product.update_attributes(params[:user_product])
+      user_product.destroy if user_product.quantity == 0
       if request.xhr?
-        render 'shared/_list', layout: false
+        render 'shared/_sidebar', layout: false
       else
         redirect_to :back
       end
@@ -37,11 +37,12 @@ class UserProductsController < ApplicationController
     end
   end
 
+  #this method is no longer being used
   def destroy
     user_product = UserProduct.find(params[:id])
     if user_product.destroy
       if request.xhr?
-        render "shared/_list", layout: false
+        render "shared/_sidebar", layout: false
       else
         redirect_to :back
       end
@@ -55,7 +56,7 @@ class UserProductsController < ApplicationController
     user_product.quantity += params[:change].to_i
     if user_product.save
       if request.xhr?
-        render 'shared/_list', layout: false
+        render 'shared/_sidebar', layout: false
       else
         redirect_to :back
       end

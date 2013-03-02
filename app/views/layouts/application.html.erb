@@ -13,17 +13,17 @@
 <% elsif flash[:alert] %>
   <div class="alert"><%= flash[:alert] %></div>
 <% end %>
-<% if user_signed_in? %>
-  <%= link_to "log out", destroy_user_session_path, method: :delete %>
-<% else %>
-  <%= link_to "sign in", new_user_session_path %>
-  <%= link_to "sign up", new_user_registration_path %>
-<% end %>
 
-<div class="shopping-list-container">
-  <%= render partial: "shared/sidebar" if current_user %>
+<div class="row">
+  <%= render partial: "shared/navbar" %>
+  <div class="main span6">
+    <%= yield %>
+  </div>
+
+  <div class="shopping-list-container span4">
+    <%= render partial: "shared/sidebar" if current_user %>
+  </div>
 </div>
-<%= yield %>
 
 </body>
 </html>
