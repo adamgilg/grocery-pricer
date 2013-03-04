@@ -20,7 +20,7 @@ class UserProductsController < ApplicationController
 
   # handles all creation and incrementing-by-one of user_products
   def increment
-    if user_product = UserProduct.where(product_id: params[:product_id], user_id: current_user).first
+    if user_product = UserProduct.where(product_id: params[:product_id], list: session[:current_list]).first
       user_product.quantity += 1
     else
       user_product = UserProduct.new(product_id: params[:product_id], user_id: current_user.id)

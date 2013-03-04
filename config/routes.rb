@@ -32,6 +32,7 @@ GroceryPricer::Application.routes.draw do
   resources :store_products
   resources :store_reviews
   resources :product_reviews
+  resources :shopping_lists
 
   root to: 'stores#index'
 end

@@ -19,7 +19,7 @@ module ApplicationHelper
   end
 
   def total_list_price(user)
-
+    # calculate price of whole list at chosen stores
   end
 
   def sort_list_by_store(user)

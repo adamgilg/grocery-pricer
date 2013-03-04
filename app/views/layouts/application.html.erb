@@ -6,8 +6,8 @@
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
-<body>
 
+<body>
 <%= render partial: "shared/navbar" %>
 
 <div class="container">
@@ -23,7 +23,9 @@
     </div>
 
     <div class="shopping-list-container span4">
-      <%= render partial: "shared/sidebar" if current_user %>
+      <% if user_signed_in? %>
+        <%= render partial: "shared/sidebar" %>
+      <% end %>
     </div>
   </div>
 </div>
