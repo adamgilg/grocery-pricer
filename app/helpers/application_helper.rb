@@ -10,51 +10,13 @@ module ApplicationHelper
     "#{store_prod.store.name} (#{store_prod.store.address}) | #{format_price(store_prod.price)}"
   end
 
-  # def user_products_count(user)
-  #   product_counts = {}
-  #   user.products.all.each do |prod|
-  #     if product_counts[prod]
-  #       product_counts[prod] += 1
-  #     else
-  #       product_counts[prod] = 1
-  #     end
-  #   end
-  #   return product_counts
-  # end
-
-  #adds to current_user's shopping list
+  #adds to current_user's shopping list (creates new or increments by one)
   def add_to_list(product)
     button_to("Add to shopping list",
-      user_products_path(product_id: product.id),
+      increment_user_product_path(product_id: product.id),
       method: :post,
       remote: true)
   end
-
-  def increment_user_product_btn(product, change, btn_text)
-    button_to(btn_text,
-      increment_user_product_path(product_id: product.id, change: change),
-      remote: true,
-      method: :put)
-  end
-
-  # #removes single instance of an item from current_user's shopping list
-  # def remove_one_from_list_btn(product)
-  #   user_product = UserProduct.where(product_id: product.id, user_id: current_user.id).last
-  #   button_to("Remove one",
-  #     user_product_path(user_product.id),
-  #     method: :delete,
-  #     remote: true,
-  #     form_class: "btn remove-from-list-btn")
-  # end
-
-  # #removes all of one user's item from shopping list
-  # def remove_all_btn(product)
-  #   button_to("Remove all",
-  #     remove_from_list_product_path(product),
-  #     method: :delete,
-  #     remote: true,
-  #     form_class: "btn remove-all-from-list-btn")
-  # end
 
   def total_list_price(user)
 

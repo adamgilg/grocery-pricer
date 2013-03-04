@@ -1,8 +1,7 @@
 <div class="shopping-list">
   <% current_user.user_products.each do |user_prod| %>
     <p>
-      <%= link_to user_prod.product.name, product_path(user_prod.product) %> |
-      Quantity:
+      <%= link_to user_prod.product.name, product_path(user_prod.product) %>
       <%= simple_form_for(user_prod, remote: true) do |f| %>
         <%= f.input :quantity, wrapper_html: { class: "change-user-product-quantity" } %>
       <% end %>

@@ -39,13 +39,9 @@
               form_class: "toggle-availability make-unavailable")
               %>
           </li>
-          <% if current_user %>
+          <% if user_signed_in? %>
             <div class="add-to-list-btn">
-              <% if current_user.products.include?(store_product.product) %>
-                <%= increment_user_product_btn(store_product.product, 1, "Add another") %>
-              <% else %>
-                <%= add_to_list(store_product.product) %>
-              <% end %>
+              <%= add_to_list(store_product.product) %>
             </div>
           <% end %>
 

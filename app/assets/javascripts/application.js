@@ -19,10 +19,10 @@ $(function() {
   $(".add-to-list-btn > form").on("ajax:success", function(event, data) {
     $(".shopping-list-container").html(data);
   });
-
-  // $(".shopping-list-container").on("ajax:success", ".remove-from-list-btn", function(event, data) {
-  //   $(".shopping-list-container").html(data);
-  // });
+  // looks for a 'form' within s-l-c because all forms within it are reloaded after original page load
+  $(".shopping-list-container").on("ajax:success", "form", function(event, data) {
+    $(".shopping-list-container").html(data);
+  });
 
   // $(".shopping-list-container").on("ajax:success", ".remove-all-from-list-btn", function(event, data) {
   //   $(".shopping-list-container").html(data);
@@ -42,15 +42,15 @@ $(function() {
     $('.page-view-tabs-container > a[href="' + hash + '"]').click();
   } else {
     $(".page-view-tabs-container > a:first").click();
-  };
+  }
   //}
 
   // manages shopping list quantity changes
-  $(".change-user-product-quantity").change(function() {
+  $(".shopping-list-container").on("change", ".change-user-product-quantity > input", function() {
     $(this).closest('form').submit();
-  })
+  });
 
   $(".choose-user-product-store").change(function() {
     $(this).closest('form').submit();
-  })
+  });
 })
