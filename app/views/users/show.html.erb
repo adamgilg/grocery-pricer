@@ -28,8 +28,13 @@
   </div>
 
   <div id="user-shopping-list" class="page-item">
+    <div class="select-list-user-page">
+      <%= render partial: "/shared/select_list" %>
+    </div>
     <h3><%= "#{@user.name}'s shopping list" %></h3>
-    <%= render partial: "shopping_list" %>
+    <div class="shopping-list-display">
+      <%= render partial: "shopping_list" %>
+    </div>
     <%= email_shopping_list %>
   </div>
 

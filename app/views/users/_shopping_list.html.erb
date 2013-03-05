@@ -1,5 +1,6 @@
-<ol>
-  <% current_user.user_products.each do |user_prod| %>
+ <ol>
+  <% current_list = ShoppingList.find(session[:current_list_id]) %>
+  <% current_list.user_products.each do |user_prod| %>
     <li>
       <%= "#{user_prod.product.name} | #{user_prod.quantity}" %>
       <%= simple_form_for(user_prod, remote: true) do |f| %>

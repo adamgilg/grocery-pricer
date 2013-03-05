@@ -24,6 +24,12 @@ $(function() {
     $(".shopping-list-container").html(data);
   });
 
+  // switches chosen list on user show page - doesn't currently work
+  // console.log($('.select-shopping-list'));
+  $(".select-list-user-page").on("ajax:success", function(event, data) {
+    $(".shopping-list-display").html(data);
+  });
+
   // $(".shopping-list-container").on("ajax:success", ".remove-all-from-list-btn", function(event, data) {
   //   $(".shopping-list-container").html(data);
   // });
@@ -43,24 +49,40 @@ $(function() {
   } else {
     $(".page-view-tabs-container > a:first").click();
   }
-  //}
 
-  // manages shopping list item quantity changes
-  $(".shopping-list-container").on("change", ".change-user-product-quantity > input", function() {
-    $(this).closest('form').submit();
-  });
+  // handles all form submission without buttons
+  // replaces very repetitive code doing this same thing
+  var invisibleSubmit = function(container, submitForm) {
+    $(container).on("change", submitForm, function() {
+      $(this).closest('form').submit();
+    })
+  }
+  // shopping list item quantity changes
+  invisibleSubmit(".shopping-list-container", ".change-user-product-quantity > input");
+  // $(".shopping-list-container").on("change", ".change-user-product-quantity > input", function() {
+  //   $(this).closest('form').submit();
+  // });
 
-  $(".choose-user-product-store").change(function() {
-    $(this).closest('form').submit();
-  });
+  // shopping list item store choice
+  invisibleSubmit(".choose-user-product-store");
+  // $(".choose-user-product-store").change(function() {
+  //   $(this).closest('form').submit();
+  // });
 
   // manages shopping list title change
-  $(".shopping-list-container").on("change", ".shopping-list-title > input", function() {
-    $(this).closest('form').submit();
-  });
+  invisibleSubmit(".shopping-list-container", ".shopping-list-title > input");
+  // $(".shopping-list-container").on("change", ".shopping-list-title > input", function() {
+  //   $(this).closest('form').submit();
+  // });
 
-  // manages shopping list selection
-  $(".shopping-list-container").on("change", ".select-shopping-list", function() {
-    $(this).closest("form").submit();
-  })
+  // manages shopping list selection in sidebar and user show page
+  invisibleSubmit(".shopping-list-container", ".select-shopping-list");
+  // $(".shopping-list-container").on("change", ".select-shopping-list", function() {
+  //   $(this).closest("form").submit();
+  // });
+
+  invisibleSubmit("#user-shopping-list", ".select-shopping-list");
+  // $("#user-shopping-list").on("change", ".select-shopping-list", function() {
+  //   $(this).closest("form").submit();
+  // });
 })

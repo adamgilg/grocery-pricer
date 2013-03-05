@@ -1,0 +1,6 @@
+<!-- custom form to select list for display -->
+<%= form_tag(change_current_list_shopping_lists_path, method: :post, class: 'select-shopping-list', remote: true) do %>
+  <%= label_tag("select_current_list", "Select list") %>
+  <% option_pairs = ShoppingList.where(user_id: current_user.id).map { |sl| [sl.title, sl.id] } %>
+  <%= select_tag(:shopping_list_id, options_for_select(option_pairs, selected: session[:current_list_id])) %>
+<% end %>
