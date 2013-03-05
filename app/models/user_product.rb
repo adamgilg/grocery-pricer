@@ -1,5 +1,5 @@
 class UserProduct < ActiveRecord::Base
-  attr_accessible :user_id, :product_id, :quantity, :store_product_id, :list_id
+  attr_accessible :user_id, :product_id, :quantity, :store_product_id, :shopping_list_id
 
   belongs_to :user
   belongs_to :product
@@ -7,8 +7,8 @@ class UserProduct < ActiveRecord::Base
   belongs_to :shopping_list
   has_one :store, through: :store_product
 
-  validates :shopping_list, presence: true
-  validates :user, presence: true
+  validates :shopping_list_id, presence: true
+  # validates :user, presence: true
   validates :product_id, presence: true
-  validates :product_id, uniqueness: { scope: :user_id }
+  validates :product_id, uniqueness: { scope: :shopping_list_id }
 end

@@ -73,7 +73,7 @@ ActiveRecord::Schema.define(:version => 20130304220556) do
     t.datetime "updated_at",                      :null => false
     t.integer  "quantity",         :default => 1
     t.integer  "store_product_id"
-    t.integer  "list_id"
+    t.integer  "shopping_list_id"
   end
 
   create_table "users", :force => true do |t|

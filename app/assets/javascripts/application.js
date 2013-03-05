@@ -45,12 +45,17 @@ $(function() {
   }
   //}
 
-  // manages shopping list quantity changes
+  // manages shopping list item quantity changes
   $(".shopping-list-container").on("change", ".change-user-product-quantity > input", function() {
     $(this).closest('form').submit();
   });
 
   $(".choose-user-product-store").change(function() {
+    $(this).closest('form').submit();
+  });
+
+  // manages shopping list title change
+  $(".shopping-list-container").on("change", ".shopping-list-title > input", function() {
     $(this).closest('form').submit();
   });
 })

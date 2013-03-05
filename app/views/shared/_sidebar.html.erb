@@ -1,12 +1,16 @@
 <div class="shopping-list">
-  <% current_user.user_products.each do |user_prod| %>
+  <% current_list = ShoppingList.find(session[:current_list_id]) %>
+  <%= simple_form_for(current_list, remote: true) do |f| %>
+    <%= f.input :title, label: false, wrapper_html: { class: "shopping-list-title" } %>
+  <% end %>
+
+  <% current_list.user_products.each do |item| %>
     <p>
-      <%= link_to user_prod.product.name, product_path(user_prod.product) %>
-      <%= simple_form_for(user_prod, remote: true) do |f| %>
+      <%= link_to item.product.name, product_path(item.product) %>
+      <%= simple_form_for(item, remote: true) do |f| %>
         <%= f.input :quantity, wrapper_html: { class: "change-user-product-quantity" } %>
       <% end %>
-      (avg price: <%= format_price(user_prod.product.average_price) %>)
+      (avg price: <%= format_price(item.product.average_price) %>)
     </p>
-
   <% end %>
 </div>

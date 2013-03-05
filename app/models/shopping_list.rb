@@ -7,8 +7,9 @@ class ShoppingList < ActiveRecord::Base
 
   belongs_to :user
   has_many :user_products
+  has_many :products, through: :user_products
 
-  def find_most_recent
-    self.where(user_id: current_user.id).order("updated_at DESC").first
+  def self.find_most_recent(user)
+    self.where(user_id: user.id).order("updated_at DESC").first
   end
 end

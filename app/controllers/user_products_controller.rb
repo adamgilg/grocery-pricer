@@ -20,10 +20,13 @@ class UserProductsController < ApplicationController
 
   # handles all creation and incrementing-by-one of user_products
   def increment
-    if user_product = UserProduct.where(product_id: params[:product_id], list: session[:current_list]).first
+    if user_product = UserProduct.where(product_id: params[:product_id],
+        shopping_list_id: session[:current_list_id]).first
       user_product.quantity += 1
     else
-      user_product = UserProduct.new(product_id: params[:product_id], user_id: current_user.id)
+      user_product = UserProduct.new(product_id: params[:product_id],
+          shopping_list_id: session[:current_list_id],
+          user_id: current_user.id)
     end
     if user_product.save
       if request.xhr?
