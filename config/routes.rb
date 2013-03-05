@@ -29,10 +29,15 @@ GroceryPricer::Application.routes.draw do
     end
   end
 
+  resources :shopping_lists do
+    collection do
+      post :change_current_list
+    end
+  end
+
   resources :store_products
   resources :store_reviews
   resources :product_reviews
-  resources :shopping_lists
 
   root to: 'stores#index'
 end

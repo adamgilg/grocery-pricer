@@ -22,4 +22,14 @@ class ShoppingListsController < ApplicationController
       render nothing: true, status: 500
     end
   end
+
+  def change_current_list
+    shopping_list = ShoppingList.find(params[:shopping_list_id])
+    session[:current_list_id] = shopping_list.id
+    if request.xhr?
+      render 'shared/_sidebar', layout: false
+    else
+      redirect_to :back
+    end
+  end
 end

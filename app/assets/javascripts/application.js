@@ -58,4 +58,9 @@ $(function() {
   $(".shopping-list-container").on("change", ".shopping-list-title > input", function() {
     $(this).closest('form').submit();
   });
+
+  // manages shopping list selection
+  $(".shopping-list-container").on("change", ".select-shopping-list", function() {
+    $(this).closest("form").submit();
+  })
 })

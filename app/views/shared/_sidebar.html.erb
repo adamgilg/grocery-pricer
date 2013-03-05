@@ -1,4 +1,10 @@
-<div class="shopping-list">
+<div class="shopping-list well">
+  <%= form_tag(change_current_list_shopping_lists_path, method: :post, class: 'select-shopping-list', remote: true) do %>
+    <%= label_tag("select_current_list", "Select list") %>
+    <% option_pairs = ShoppingList.where(user_id: current_user.id).map { |sl| [sl.title, sl.id] } %>
+    <%= select_tag(:shopping_list_id, options_for_select(option_pairs), { include_blank: "choose a list" }) %>
+  <% end %>
+
   <% current_list = ShoppingList.find(session[:current_list_id]) %>
   <%= simple_form_for(current_list, remote: true) do |f| %>
     <%= f.input :title, label: false, wrapper_html: { class: "shopping-list-title" } %>
