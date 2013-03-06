@@ -26,6 +26,8 @@
           <% if user_signed_in? %>
           <!-- except if on user show sidebar page -->
             <%= render partial: "shared/sidebar" unless @user %>
+            <%= render partial: "shared/new_product_modal", locals: { new_product: Product.new } %>
+            <%= render partial: "shared/new_store_modal", locals: { new_store: Store.new } %>
           <% end %>
         </div>
       </div>

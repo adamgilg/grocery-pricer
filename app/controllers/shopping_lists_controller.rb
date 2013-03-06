@@ -3,7 +3,12 @@ class ShoppingListsController < ApplicationController
     shopping_list = ShoppingList.new(user_id: params[:user_id])
     if shopping_list.save
       flash[:notice] = "New shopping list!"
-      redirect_to :back
+      session[:current_list_id] = shopping_list.id
+      if request.xhr?
+        render 'shared/_sidebar', layout: false
+      else
+        redirect_to :back
+      end
     else
       flash[:alert] = "Problem saving shopping list"
     end
@@ -13,7 +18,6 @@ class ShoppingListsController < ApplicationController
     shopping_list = ShoppingList.find(params[:id])
     if shopping_list.update_attributes(params[:shopping_list])
       if request.xhr?
-        # what if the request comes from a different section of the app?
         render 'shared/_sidebar', layout: false
       else
         redirect_to :back

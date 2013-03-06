@@ -12,8 +12,12 @@
       <li><%= link_to "stores", stores_path %></li>
       <li><%= link_to "products", products_path %></li>
       <% if user_signed_in? %>
-        <li><%= link_to "add new product", new_product_path %></li>
-        <li><%= link_to "add new store", new_store_path %></li>
+        <li>
+          <a href="#new-product" role="button" data-toggle="modal">add new product</a>
+        </li>
+        <li>
+          <a href="#new-store" role="button" data-toggle="modal">add new store</a>
+        </li>
       <% end %>
     </ul>
   </div>

@@ -1,0 +1,17 @@
+<div id="new-store" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="new-store-label" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+    <h3 id="new-store-label">New Store</h3>
+  </div>
+  <div class="modal-body">
+    <%= simple_form_for new_store do |f| %>
+      <%= f.input :name, input_html: { class: "span6" } %>
+      <%= f.input :address, input_html: { class: "span6" } %>
+      <%= f.input :description, as: :text, class: "store-description-field", input_html: { class: "span6" } %>
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+    <%= f.button :submit, class: "btm btn-primary" %>
+  </div>
+  <% end %>
+</div>
