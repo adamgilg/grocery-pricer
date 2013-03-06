@@ -4,24 +4,29 @@
   <%= @store.address %>
 </div>
 <p>Average review: <%= "#{@store.average_rating} (#{pluralize(@store.reviews.count, 'review')})" %></p>
+<% if user_signed_in? %>
+  <%= link_to "Review this store", new_store_store_review_path(@store), class: "btn btn-add-store-review" %>
 
-<%= link_to "Review this store", new_store_store_review_path(@store), class: "btn btn-add-store-review" %>
-
-<%= link_to "Add a product", new_store_store_product_path(@store), class: "btn btn-add-store-product" %>
+  <%= link_to "Add a product", new_store_store_product_path(@store), class: "btn btn-add-store-product" %>
+<% end %>
 
 <div id="page-content">
-  <div class="page-view-tabs-container">
-    <a href="#store-reviews-list">Reviews</a>
-    <a href="#store-products-list">Products</a>
-    <a href="#nonexistant">Directions</a>
-  </div>
+  <ul class="page-view-tabs-container nav nav-tabs">
+    <li><a href="#store-products-list">Products</a></li>
+    <li><a href="#store-reviews-list">Reviews</a></li>
+    <li><a href="#nonexistant">Directions</a></li>
+  </ul>
 
   <div id="store-products-list" class="page-item">
     <%= render partial: 'product_list', locals: { store: @store } %>
   </div>
 
   <div id="store-reviews-list" class="page-item">
-    <%= render partial: "/shared/reviews", locals: { element: @store } %>
+    <% if @store.reviews.blank? %>
+      <em><%= @store.name %> has no reviews yet.</em>
+    <% else %>
+      <%= render partial: "/shared/reviews", locals: { element: @store } %>
+    <% end %>
   </div>
 
 </div>

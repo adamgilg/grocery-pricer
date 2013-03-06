@@ -3,6 +3,7 @@ class ShoppingListsController < ApplicationController
     shopping_list = ShoppingList.new(user_id: params[:user_id])
     if shopping_list.save
       flash[:notice] = "New shopping list!"
+      redirect_to :back
     else
       flash[:alert] = "Problem saving shopping list"
     end

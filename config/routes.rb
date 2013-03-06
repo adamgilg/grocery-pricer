@@ -25,7 +25,7 @@ GroceryPricer::Application.routes.draw do
   end
 
   resources :user_products do
-    member do
+    collection do
       post :increment
     end
   end

@@ -1,12 +1,18 @@
 <h1>Products</h1>
-<%= link_to "Add a new product", new_product_path %>
+<% if user_signed_in? %>
+  <a href="#myModal" role="button" class="btn" data-toggle="modal">Add new product</a>
+<% end %>
 <ul class="products-list">
   <% @products.each do |product| %>
     <li>
       <%= link_to product.name, product_path(product) %>
-        <p>Brand: <%= product.brand %></p>
-        <p><%= product.description %></p>
+      <p>Brand: <%= product.brand %></p>
+      <p><%= product.description %></p>
+      <% if user_signed_in? %>
         <div class="add-to-list-btn"><%= add_to_list(product) %></div>
+      <% end %>
     </li>
   <% end %>
 </ul>
+
+<%= render partial: '/shared/new_product_modal', locals: { new_product: Product.new } %>

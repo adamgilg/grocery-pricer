@@ -22,24 +22,23 @@
             </span>
           </li>
 
-
-          <li class="buttons">
-            Is this product currently available?
-            <%= button_to('Yes',
-              store_store_product_path(store, store_product),
-              method: :put,
-              remote: true,
-              form_class: "toggle-availability make-available")
-              %>
-
-            <%= button_to('No',
-              store_store_product_path(store, store_product),
-              method: :put,
-              remote: true,
-              form_class: "toggle-availability make-unavailable")
-              %>
-          </li>
           <% if user_signed_in? %>
+            <li class="buttons">
+              Is this product currently available?
+              <%= button_to('Yes',
+                store_store_product_path(store, store_product),
+                method: :put,
+                remote: true,
+                form_class: "toggle-availability make-available")
+                %>
+
+              <%= button_to('No',
+                store_store_product_path(store, store_product),
+                method: :put,
+                remote: true,
+                form_class: "toggle-availability make-unavailable")
+                %>
+            </li>
             <div class="add-to-list-btn">
               <%= add_to_list(store_product.product) %>
             </div>

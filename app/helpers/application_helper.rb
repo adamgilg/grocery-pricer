@@ -13,7 +13,7 @@ module ApplicationHelper
   #adds to current_user's shopping list (creates new or increments by one)
   def add_to_list(product)
     button_to("Add to shopping list",
-      increment_user_product_path(product_id: product.id),
+      increment_user_products_path(product_id: product.id),
       method: :post,
       remote: true)
   end

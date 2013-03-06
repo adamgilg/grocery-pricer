@@ -11,8 +11,11 @@
 
       <li><%= link_to "stores", stores_path %></li>
       <li><%= link_to "products", products_path %></li>
-      <li><%= link_to "add new product", new_product_path %></li>
-      <li><%= link_to "add new store", new_store_path %></li>
+      <% if user_signed_in? %>
+        <li><%= link_to "add new product", new_product_path %></li>
+        <li><%= link_to "add new store", new_store_path %></li>
+      <% end %>
     </ul>
   </div>
 </div>
+
