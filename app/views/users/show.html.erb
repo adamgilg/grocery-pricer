@@ -1,13 +1,13 @@
 <h1><%= @user.name %></h1>
 
 <div id="page-content">
-  <div class="page-view-tabs-container">
-    <a href="#user-store-reviews">Store reviews</a>
-    <a href="#user-product-reviews">Product reviews</a>
+  <ul class="page-view-tabs-container nav nav-tabs">
     <% if current_user == @user %>
-      <a href="#user-shopping-list">Shopping list</a>
+      <li><a href="#user-shopping-list">Shopping lists</a></li>
     <% end %>
-  </div>
+    <li><a href="#user-store-reviews">Store reviews</a></li>
+    <li><a href="#user-product-reviews">Product reviews</a></li>
+  </ul>
 
   <div id="user-store-reviews" class="page-item">
     <h3><%= "#{@user.name}'s store reviews" %></h3>
@@ -28,11 +28,15 @@
   </div>
 
   <div id="user-shopping-list" class="page-item">
-    <div class="select-list-user-page">
-      <%= render partial: "/shared/select_list" %>
-    </div>
-    <h3><%= "#{@user.name}'s shopping list" %></h3>
-    <div class="shopping-list-display">
+    <!-- allows user to select current shopping list -->
+    <%= form_tag(change_current_list_users_path, method: :post, class: 'select-shopping-list-user-page', remote: true) do %>
+      <%= label_tag("select_current_list", "Select list") %>
+      <% option_pairs = ShoppingList.where(user_id: current_user.id).map { |sl| [sl.title, sl.id] } %>
+      <%= select_tag(:shopping_list_id, options_for_select(option_pairs, selected: session[:current_list_id])) %>
+    <% end %>
+
+    <!-- shows currently selected shopping list -->
+    <div id="shopping-list-display">
       <%= render partial: "shopping_list" %>
     </div>
     <%= email_shopping_list %>

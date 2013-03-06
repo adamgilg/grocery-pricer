@@ -9,9 +9,13 @@ class ApplicationController < ActionController::Base
         new_list = ShoppingList.create(user_id: current_user.id)
         session[:current_list_id] = new_list.id
       else
-        # uses most recently updated shopping list if user has one
-        # may be problematic if user changes list on one page and doesn't add anything
-        # then on next page will be set to a different list
+        session[:current_list_id] = ShoppingList.find_most_recent(current_user).id
+      end
+    elsif user_signed_in? && ShoppingList.where(id: session[:current_list_id]).blank?
+      if current_user.shopping_lists.blank?
+        new_list = ShoppingList.create(user_id: current_user.id)
+        session[:current_list_id] = new_list.id
+      else
         session[:current_list_id] = ShoppingList.find_most_recent(current_user).id
       end
     end

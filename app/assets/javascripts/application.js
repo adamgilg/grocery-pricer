@@ -9,7 +9,7 @@
 //
 // WARNING: THE FIRST BLANK LINE MARKS THE END OF WHAT'S TO BE PROCESSED, ANY BLANK LINE SHOULD
 // GO AFTER THE REQUIRES BELOW.
-//
+//= require bootstrap
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
@@ -25,64 +25,49 @@ $(function() {
   });
 
   // switches chosen list on user show page - doesn't currently work
-  // console.log($('.select-shopping-list'));
-  $(".select-list-user-page").on("ajax:success", function(event, data) {
+  $(".select-shopping-list-user-page").on("ajax:success", function(event, data) {
     $(".shopping-list-display").html(data);
   });
 
-  // $(".shopping-list-container").on("ajax:success", ".remove-all-from-list-btn", function(event, data) {
-  //   $(".shopping-list-container").html(data);
-  // });
-
   // manages info tabs
-  $(".page-view-tabs-container > a").click(function() {
-    $(".page-view-tabs-container > a").removeClass("active");
-    $(this).addClass("active");
-    $(".page-item").hide();
+  $(".page-view-tabs-container a").click(function(event) {
     var href = $(this).attr("href");
+    event.preventDefault();
+    window.location.hash = href;
+    $(".page-view-tabs-container li").removeClass("active");
+    $(this).closest("li").addClass("active");
+    $(".page-item").hide();
     $(href).show();
   });
   // should only click if none of the tabs have been clicked on previously
   var hash = window.location.hash;
   if (hash.length) {
-    $('.page-view-tabs-container > a[href="' + hash + '"]').click();
+    $('.page-view-tabs-container a[href="' + hash + '"]').click();
   } else {
-    $(".page-view-tabs-container > a:first").click();
+    $(".page-view-tabs-container a:first").click();
   }
 
-  // handles all form submission without buttons
-  // replaces very repetitive code doing this same thing
+  // handles all form submission without submit button
   var invisibleSubmit = function(container, submitForm) {
     $(container).on("change", submitForm, function() {
       $(this).closest('form').submit();
     })
-  }
+  };
   // shopping list item quantity changes
+    // on sidebar
   invisibleSubmit(".shopping-list-container", ".change-user-product-quantity > input");
-  // $(".shopping-list-container").on("change", ".change-user-product-quantity > input", function() {
-  //   $(this).closest('form').submit();
-  // });
+    // on user show page
+  invisibleSubmit("#shopping-list-display", ".change-user-product-quantity > input");
 
   // shopping list item store choice
   invisibleSubmit(".choose-user-product-store");
-  // $(".choose-user-product-store").change(function() {
-  //   $(this).closest('form').submit();
-  // });
 
   // manages shopping list title change
   invisibleSubmit(".shopping-list-container", ".shopping-list-title > input");
-  // $(".shopping-list-container").on("change", ".shopping-list-title > input", function() {
-  //   $(this).closest('form').submit();
-  // });
 
   // manages shopping list selection in sidebar and user show page
   invisibleSubmit(".shopping-list-container", ".select-shopping-list");
-  // $(".shopping-list-container").on("change", ".select-shopping-list", function() {
-  //   $(this).closest("form").submit();
-  // });
 
-  invisibleSubmit("#user-shopping-list", ".select-shopping-list");
-  // $("#user-shopping-list").on("change", ".select-shopping-list", function() {
-  //   $(this).closest("form").submit();
-  // });
+  // doesn't work with user shopping list page
+  invisibleSubmit("#user-shopping-list", ".select-shopping-list-user-page");
 })

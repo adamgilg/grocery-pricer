@@ -18,8 +18,15 @@ module ApplicationHelper
       remote: true)
   end
 
-  def total_list_price(user)
-    # calculate price of whole list at chosen stores
+  def total_list_price
+    list = ShoppingList.find(session[:current_list_id])
+    total = 0
+    list.user_products.each do |up|
+      if up.store_product
+        total += (up.store_product.price * up.quantity)
+      end
+    end
+    total
   end
 
   def sort_list_by_store(user)

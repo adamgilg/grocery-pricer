@@ -2,7 +2,7 @@ class ShoppingListsController < ApplicationController
   def create
     shopping_list = ShoppingList.new(user_id: params[:user_id])
     if shopping_list.save
-      # do something js-ey
+      flash[:notice] = "New shopping list!"
     else
       flash[:alert] = "Problem saving shopping list"
     end
@@ -30,6 +30,16 @@ class ShoppingListsController < ApplicationController
       render 'shared/_sidebar', layout: false
     else
       redirect_to :back
+    end
+  end
+
+  def destroy
+    shopping_list = ShoppingList.find(params[:id])
+    if shopping_list.destroy
+      flash[:notice] = "List deleted"
+      redirect_to :back
+    else
+      flash[:alert] = "Problem deleting list"
     end
   end
 end

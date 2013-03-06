@@ -1,8 +1,31 @@
  <ol>
   <% current_list = ShoppingList.find(session[:current_list_id]) %>
+
+  <!-- form for changing title -->
+  <%= simple_form_for(current_list, remote: true) do |f| %>
+    <%= f.input :title, wrapper_html: { class: "shopping-list-title" } %>
+    <%= f.button :submit, "Update title" %>
+  <% end %>
+
+  <!-- lists products -->
   <% current_list.user_products.each do |user_prod| %>
     <li>
-      <%= "#{user_prod.product.name} | #{user_prod.quantity}" %>
+      <%= user_prod.product.name %>
+
+      <!-- form to change item quantity -->
+      <%= simple_form_for(user_prod, remote: true) do |f| %>
+        <%= f.input :quantity, wrapper_html: { class: "change-user-product-quantity" } %>
+      <% end %>
+
+      <!-- displays price of one and price for selected quantity -->
+      <% if user_prod.store_product %>
+        <%= "@ #{format_price(user_prod.store_product.price)}/qty" %>
+        <p>
+          <%= "Total price: #{format_price(user_prod.store_product.price * user_prod.quantity)}" %>
+        </p>
+      <% end %>
+
+      <!-- form to change store for item -->
       <%= simple_form_for(user_prod, remote: true) do |f| %>
         <%= f.association :store_product,
           collection: StoreProduct.where(product_id: user_prod.product_id),
@@ -11,4 +34,7 @@
       <% end %>
     </li>
   <% end %>
+  <%= "Total list price: #{format_price(total_list_price)}" %>
+
+  <%= button_to "Delete List", shopping_list_path(current_list.id), method: :delete %>
 </ol>
