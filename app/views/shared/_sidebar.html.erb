@@ -1,7 +1,10 @@
 <div class="shopping-list well">
-  <%= button_to "Create New List", shopping_lists_path(user_id: current_user.id), method: :post, remote: true, class: "btn" %>
+  <%= button_to "Create New List", shopping_lists_path(user_id: current_user.id), method: :post, remote: true, class: "btn btn-primary" %>
+
   <%= render partial: "/shared/select_list" %>
+
   <% current_list = ShoppingList.find(session[:current_list_id]) %>
+
   <%= simple_form_for(current_list, remote: true) do |f| %>
     <%= f.input :title, wrapper_html: { class: "shopping-list-title" } %>
   <% end %>
@@ -10,9 +13,10 @@
     <p>
       <%= link_to item.product.name, product_path(item.product) %>
       <%= simple_form_for(item, remote: true) do |f| %>
-        <%= f.input :quantity, wrapper_html: { class: "change-user-product-quantity" } %>
+        <%= f.input :quantity, inline_label: "Quantity:", wrapper_html: { class: "change-user-product-quantity" } %>
       <% end %>
       (avg price: <%= format_price(item.product.average_price) %>)
     </p>
+    <hr>
   <% end %>
 </div>

@@ -12,9 +12,75 @@
  *= require_tree .
  */
 @import "bootstrap";
+@import "bootstrap-responsive";
 
-.store-description-field {
+.page-view-tabs-container {
+  margin-top: 10px;
+}
 
+.well {
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+.shopping-list-container {
+  float: right;
+  p, form {
+    margin-bottom: 0px;
+  }
+}
+
+.main {
+  float: left;
+}
+
+.shopping-list-title input {
+  width: 175px;
+}
+
+
+
+.select-shopping-list select {
+  width: 190px;
+}
+
+.modal-body {
+  input {
+    width: 75%;
+  }
+  .numeric {
+    width: 60px;
+  }
+  select {
+    width: 75%;
+  }
+  label.radio {
+    padding-right: 10px;
+  }
+  textarea {
+    width: 75%;
+  }
+}
+
+.change-user-product-quantity {
+  input {
+    width: 40px;
+  }
+  .control-label {
+    display: inline;
+    padding-right: 7px;
+  }
+}
+
+hr {
+  border-color: black;
+}
+
+body {
+  background-image: url("Richmond_Grocery_Store-1924.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+  background-size: cover;
 }
 
 .reviews footer {
@@ -56,8 +122,11 @@
 textarea {
   height: 125px;
 }
-/*
-.modal {
-  width: 500px;
+
+.signin-out {
+  float: right;
 }
-*/
+
+#landing-page-content {
+  text-align: center;
+}

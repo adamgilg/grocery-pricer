@@ -9,11 +9,23 @@ class StoreProductsController < ApplicationController
     @store_product = StoreProduct.new(params[:store_product])
     if @store_product.save
       flash[:notice] = "store/product association successfully saved"
-      redirect_to root_url
     else
       flash[:alert]
-      render 'new'
     end
+    # WORKING ON THIS - NEED TO RENDER TWO DIFFERENT THINGS FOR PRODUCT/STORE VIEWS
+    # pass in info in query string
+    if request.xhr? && params[:location] == "store_show"
+      render "stores/_product_list",
+        locals: { store: @store_product.store },
+        layout: false
+    elsif request.xhr? && params[:location] == "product_show"
+      render "products/_stores_list",
+        locals: { product: @store_product.product },
+        layout: false
+    else
+      redirect_to :back
+    end
+
   end
 
   def update

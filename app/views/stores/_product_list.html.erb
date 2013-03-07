@@ -24,16 +24,15 @@
 
           <% if user_signed_in? %>
             <li class="buttons">
-              Is this product currently available?
-              <%= button_to('Yes',
+              <%= button_to('Unavailable (click to toggle)',
                 store_store_product_path(store, store_product),
                 method: :put,
                 remote: true,
                 form_class: "toggle-availability make-available",
-                class: "btn")
+                class: "btn btn-danger")
                 %>
 
-              <%= button_to('No',
+              <%= button_to('Available (click to toggle)',
                 store_store_product_path(store, store_product),
                 method: :put,
                 remote: true,

@@ -39,6 +39,7 @@ GroceryPricer::Application.routes.draw do
   resources :store_products
   resources :store_reviews
   resources :product_reviews
+  resource :static_pages, only: :show
 
-  root to: 'stores#index'
+  root to: 'static_pages#show'
 end

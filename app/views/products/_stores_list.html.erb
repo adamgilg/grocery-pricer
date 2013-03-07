@@ -1,0 +1,9 @@
+<ul>
+  <strong>Sold in <%= pluralize(product.stores.count, 'store') %>:</strong>
+    <% product.stores.each do |store| %>
+      <li>
+        <%= link_to "#{store.name} (#{store.address})", store_path(store) %>
+        <%= "(#{format_price(StoreProduct.where(store_id: store, product_id: product).first.price)})" %>
+      </li>
+  <% end %>
+</ul>

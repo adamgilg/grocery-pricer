@@ -4,14 +4,18 @@
   <%= @store.address %>
 </div>
 <p>Average review: <%= "#{@store.average_rating} (#{pluralize(@store.reviews.count, 'review')})" %></p>
-<% if user_signed_in? %>
-  <%= link_to "Review this store", new_store_store_review_path(@store), class: "btn btn-add-store-review" %>
 
-  <%= link_to "Add a product", new_store_store_product_path(@store), class: "btn btn-add-store-product" %>
+<!--
+  only display post methods for signed in user
+-->
+<% if user_signed_in? %>
+  <a href="#new-store-review" role="button" class="btn btn-primary" data-toggle="modal">Review this store</a>
+
+  <a href="#new-store-product" role="button" class="btn btn-primary" data-toggle="modal">Add a product</a>
 <% end %>
 
 <div id="page-content">
-  <ul class="page-view-tabs-container nav nav-tabs">
+  <ul class="page-view-tabs-container nav nav-pills">
     <li><a href="#store-products-list">Products</a></li>
     <li><a href="#store-reviews-list">Reviews</a></li>
     <li><a href="#store-directions">Directions</a></li>
@@ -25,7 +29,7 @@
     <% if @store.reviews.blank? %>
       <em><%= @store.name %> has no reviews yet.</em>
     <% else %>
-      <%= render partial: "/shared/reviews", locals: { element: @store } %>
+      <%= render partial: "/shared/reviews", locals: { review_subject: @store } %>
     <% end %>
   </div>
 
@@ -33,3 +37,22 @@
     <em>Check back for this feature soon!</em>
   </div>
 </div>
+
+<%= render partial: "store_reviews/new_store_review_modal", locals: { store: @store } %>
+
+<%= render partial: "store_products/new_store_product_modal", locals: { store_product: @store.store_products.build, location: "store_show" } %>
+
+<script>
+  $(function() {
+    // watches for and updates reviews list
+    $(".modal").on("ajax:success", "form", function(event, data) {
+      $("#new-store-review").modal('hide');
+      $("#store-reviews-list").html(data);
+    });
+    // watches for and updates product list
+    $(".modal").on("ajax:success", "form", function(event, data) {
+      $("#new-store-product").modal('hide');
+      $("#store-products-list").html(data);
+    });
+  })
+</script>

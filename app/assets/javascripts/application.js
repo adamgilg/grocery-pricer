@@ -29,16 +29,27 @@ $(function() {
     $(".shopping-list-display").html(data);
   });
 
-  // manages info tabs
+  // make navbar buttons appear clicked
+
+  // $(".nav a").click(function(event) {
+  //   var href = $(this).attr("href");
+  //   $(this).closest("li").addClass("active");
+  // });
+
+  // manages info tabs for user, store, and product show
   $(".page-view-tabs-container a").click(function(event) {
     var href = $(this).attr("href");
+    // prevents window from scrolling down to start of clicked tab
     event.preventDefault();
-    window.location.hash = href;
+    // sets params hash to contain appropriate tab hash
+    // window.location.hash = href;
+    // removes & adds active class, hides & shows appropriate items
     $(".page-view-tabs-container li").removeClass("active");
     $(this).closest("li").addClass("active");
     $(".page-item").hide();
     $(href).show();
   });
+  // clicks on first element for initial page load
   // should only click if none of the tabs have been clicked on previously
   var hash = window.location.hash;
   if (hash.length) {

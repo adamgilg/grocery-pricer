@@ -10,7 +10,7 @@ class ProductsController < ApplicationController
       redirect_to products_path
     else
       flash[:alert] = "Problem saving product"
-      render 'new'
+      redirect_to products_path
     end
   end
 

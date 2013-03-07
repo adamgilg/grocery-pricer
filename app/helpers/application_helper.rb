@@ -16,7 +16,7 @@ module ApplicationHelper
       increment_user_products_path(product_id: product.id),
       method: :post,
       remote: true,
-      class: "btn")
+      class: "btn btn-success")
   end
 
   def total_list_price

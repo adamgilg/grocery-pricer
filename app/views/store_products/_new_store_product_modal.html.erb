@@ -1,0 +1,24 @@
+<div id="new-store-product" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="new-store-product-label" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+    <h3 id="new-store-product-label">
+      <% if store_product.product %>
+        <%= store_product.product.name %>
+      <% elsif store_product.store %>
+        <%= store_product.store.name %>
+      <% end %>
+    </h3>
+  </div>
+  <div class="modal-body">
+    <%= simple_form_for(store_product, remote: true) do |f| %>
+      <%= hidden_field_tag("location", location) %>
+      <%= f.association :store %>
+      <%= f.association :product, label_method: :name_and_brand %>
+      <%= f.input :price, label: "Price in cents: " %>
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+    <%= f.button :submit, class: "btn btn-primary" %>
+  </div>
+  <% end %>
+</div>

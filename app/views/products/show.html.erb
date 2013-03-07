@@ -14,43 +14,42 @@
   </div>
 </div>
 
+<!--
+  Only display post actions
+  (add to store, add to list, add review)
+  if user signed in
+-->
 <% if user_signed_in? %>
   <div class="add-to-list-btn">
     <%= add_to_list(@product) %>
   </div>
+
+  <a href="#new-product-review" role="button" class="btn btn-primary" data-toggle="modal">Review this product</a>
+  <a href="#new-store-product" role="button" class="btn btn-primary" data-toggle="modal">Add to a store</a>
 <% end %>
 
-<a href="#new-product-review" role="button" class="btn" data-toggle="modal">Review this product</a>
-<%= link_to "Add to a store", new_product_store_product_path(@product) %>
-
+<!-- Display product info for everybody -->
 <div id="page-content">
-  <ul class="page-view-tabs-container nav nav-tabs">
+  <ul class="page-view-tabs-container nav nav-pills">
     <li><a href="#product-reviews-list">Reviews</a></li>
     <li><a href="#product-stores-list">Stores</a></li>
     <% if current_user %>
-    <!-- perhaps change this for not just current user - no address column in user table -->
       <li><a href="#product-near-me">Near me</a></li>
     <% end %>
   </ul>
 
   <div id="product-reviews-list" class="page-item">
-    <% if @product.reviews.blank? %>
-      <em><%= @product.name %> has no reviews yet</em>
-    <% else %>
-      <%= render partial: "/shared/reviews", locals: { element: @product } %>
-    <% end %>
+   <div id="product-review-partial">
+      <% if @product.reviews.blank? %>
+        <em><%= @product.name %> has no reviews yet</em>
+      <% else %>
+          <%= render partial: "/shared/reviews", locals: { review_subject: @product } %>
+      <% end %>
+    </div>
   </div>
 
   <div id="product-stores-list" class="page-item">
-    <ul>
-      <strong>Sold in <%= pluralize(@product.stores.count, 'store') %>:</strong>
-        <% @product.stores.each do |store| %>
-          <li>
-            <%= link_to "#{store.name} (#{store.address})", store_path(store) %>
-            <%= "(#{format_price(StoreProduct.where(store_id: store, product_id: @product).first.price)})" %>
-          </li>
-      <% end %>
-    </ul>
+    <%= render partial: "stores_list", locals: { product: @product } %>
   </div>
 
   <div id="product-near-me" class="page-item">
@@ -59,3 +58,20 @@
 </div>
 
 <%= render partial: "product_reviews/new_product_review_modal", locals: { product: @product } %>
+
+<%= render partial: "store_products/new_store_product_modal", locals: { store_product: @product.store_products.build, location: "product_show" } %>
+
+<script>
+  $(function() {
+    // watches for and updates reviews list
+    $(".modal").on("ajax:success", "form", function(event, data) {
+      $("#new-product-review").modal('hide');
+      $("#product-review-partial").html(data);
+    });
+    // watches for and updates stores list
+    $(".modal").on("ajax:success", "form", function(event, data) {
+      $("#new-store-product").modal('hide');
+      $("#product-stores-list").html(data);
+    });
+  })
+</script>

@@ -9,10 +9,15 @@ class StoreReviewsController < ApplicationController
     @store_review.user_id = current_user.id
     if @store_review.save
       flash[:notice] = "store review successfully saved"
-      redirect_to store_path(@store_review.store_id)
     else
       flash[:alert] = "failed to save store review"
-      render 'new'
+    end
+    if request.xhr?
+      render '/shared/_reviews',
+        locals: { review_subject: @store_review.store },
+        layout: false
+    else
+      redirect_to :back
     end
   end
 end

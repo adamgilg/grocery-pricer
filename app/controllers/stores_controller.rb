@@ -15,10 +15,10 @@ class StoresController < ApplicationController
     @store = Store.new(params[:store])
     if @store.save
       flash[:notice] = "Store successfully saved"
-      redirect_to root_path
+      redirect_to stores_path
     else
       flash[:alert] = "Problem saving store"
-      render 'new'
+      redirect_to stores_path
     end
   end
 end
