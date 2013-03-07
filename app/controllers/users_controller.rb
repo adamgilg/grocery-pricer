@@ -13,7 +13,7 @@ class UsersController < ApplicationController
     if request.xhr?
       render partial: "shopping_list", layout: false
     else
-      redirect_to Lback
+      redirect_to :back
     end
   end
 

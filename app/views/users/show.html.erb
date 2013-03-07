@@ -29,7 +29,7 @@
 
   <div id="user-shopping-list" class="page-item">
     <!-- allows user to select current shopping list -->
-    <%= form_tag(change_current_list_users_path, method: :post, class: 'select-shopping-list-user-page', remote: true) do %>
+    <%= form_tag(change_current_list_users_path, method: :post, class: 'select-shopping-list-user-page') do %>
       <%= label_tag("select_current_list", "Select list") %>
       <% option_pairs = ShoppingList.where(user_id: current_user.id).map { |sl| [sl.title, sl.id] } %>
       <%= select_tag(:shopping_list_id, options_for_select(option_pairs, selected: session[:current_list_id])) %>
