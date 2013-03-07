@@ -14,17 +14,13 @@
   </div>
 </div>
 
-<% if current_user %>
+<% if user_signed_in? %>
   <div class="add-to-list-btn">
-    <% if current_user.products.include?(@product) %>
-      <%= increment_user_product_btn(@product, 1, "Add another") %>
-    <% else %>
-      <%= add_to_list(@product) %>
-    <% end %>
+    <%= add_to_list(@product) %>
   </div>
 <% end %>
 
-<%= link_to "Rate this product", new_product_product_review_path(@product) %>
+<a href="#new-product-review" role="button" class="btn" data-toggle="modal">Review this product</a>
 <%= link_to "Add to a store", new_product_store_product_path(@product) %>
 
 <div id="page-content">
@@ -33,23 +29,33 @@
     <li><a href="#product-stores-list">Stores</a></li>
     <% if current_user %>
     <!-- perhaps change this for not just current user - no address column in user table -->
-      <li><a href="#nonexistant">Near me</a></li>
+      <li><a href="#product-near-me">Near me</a></li>
     <% end %>
   </ul>
 
   <div id="product-reviews-list" class="page-item">
-    <%= render partial: "/shared/reviews", locals: { element: @product } %>
+    <% if @product.reviews.blank? %>
+      <em><%= @product.name %> has no reviews yet</em>
+    <% else %>
+      <%= render partial: "/shared/reviews", locals: { element: @product } %>
+    <% end %>
   </div>
 
   <div id="product-stores-list" class="page-item">
     <ul>
-      <strong>Sold in these stores:</strong>
+      <strong>Sold in <%= pluralize(@product.stores.count, 'store') %>:</strong>
         <% @product.stores.each do |store| %>
           <li>
             <%= link_to "#{store.name} (#{store.address})", store_path(store) %>
+            <%= "(#{format_price(StoreProduct.where(store_id: store, product_id: @product).first.price)})" %>
           </li>
       <% end %>
     </ul>
   </div>
 
+  <div id="product-near-me" class="page-item">
+    <em>Check back for this feature soon!</em>
+  </div>
 </div>
+
+<%= render partial: "product_reviews/new_product_review_modal", locals: { product: @product } %>

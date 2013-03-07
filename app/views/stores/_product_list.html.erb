@@ -29,14 +29,16 @@
                 store_store_product_path(store, store_product),
                 method: :put,
                 remote: true,
-                form_class: "toggle-availability make-available")
+                form_class: "toggle-availability make-available",
+                class: "btn")
                 %>
 
               <%= button_to('No',
                 store_store_product_path(store, store_product),
                 method: :put,
                 remote: true,
-                form_class: "toggle-availability make-unavailable")
+                form_class: "toggle-availability make-unavailable",
+                class: "btn")
                 %>
             </li>
             <div class="add-to-list-btn">

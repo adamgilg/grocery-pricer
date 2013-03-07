@@ -9,10 +9,14 @@ class ProductReviewsController < ApplicationController
     @product_review.user_id = current_user.id
     if @product_review.save
       flash[:notice] = "product review successfully saved"
-      redirect_to product_path(@product_review.product_id)
+      if request.xhr?
+        render '/shared/_reviews', layout: false
+      else
+        redirect_to :back
+      end
     else
       flash[:alert] = "failed to save store review"
-      render 'new'
+      redirect_to :back
     end
   end
 end

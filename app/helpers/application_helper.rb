@@ -15,7 +15,8 @@ module ApplicationHelper
     button_to("Add to shopping list",
       increment_user_products_path(product_id: product.id),
       method: :post,
-      remote: true)
+      remote: true,
+      class: "btn")
   end
 
   def total_list_price

@@ -1,0 +1,17 @@
+<div id="new-product-review" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="new-product-review-label" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+    <h3 id="new-product-review-label">Review <%= product.name %></h3>
+  </div>
+  <div class="modal-body">
+    <%= simple_form_for(product.reviews.build, remote: true) do |f| %>
+      <%= f.input :product_id, as: :hidden %>
+      <%= f.input :rating, as: :radio_buttons, collection: 1..7, item_wrapper_class: "inline" %>
+      <%= f.input :body, as: :text, input_html: { class: "span6" } %>
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+    <%= f.button :submit, class: "btn btn-primary" %>
+  </div>
+  <% end %>
+</div>
