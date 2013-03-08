@@ -33,7 +33,7 @@ module ApplicationHelper
   def sort_list_by_store
     products_by_store = {}
     list = ShoppingList.find(session[:current_list_id])
-    ups = list.user_products.joins(:store_product).order(store_products: :store_id)
+    ups = list.user_products.joins(:store_product).order("store_products.store_id DESC")
     ups.each do |up|
       if products_by_store[up.store_product.store_id]
         products_by_store[up.store_product.store_id] << up
