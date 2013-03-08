@@ -1,4 +1,4 @@
-# Grocerier
+Grocerier
 
 Grocerier (née grocery-pricer) is a Rails app developed
 as a final project for App Academy (http://www.appacademy.io/).  return
