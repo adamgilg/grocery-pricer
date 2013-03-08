@@ -79,6 +79,9 @@ $(function() {
   // manages shopping list selection in sidebar and user show page
   invisibleSubmit(".shopping-list-container", ".select-shopping-list");
 
-  // doesn't work with user shopping list page
   invisibleSubmit("#user-shopping-list", ".select-shopping-list-user-page");
+
+  // currently collapses width of siebar when scrolled down
+  // $(".shopping-list").affix();
 })
+
