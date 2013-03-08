@@ -47,4 +47,10 @@ class ShoppingListsController < ApplicationController
       flash[:alert] = "Problem deleting list"
     end
   end
+
+  # to return total price formatted in json when store/quantity change
+  # on user show page
+  # def total_list_price
+  #   price = format_price(total_list_price(session[:current_list_id]))
+  # end
 end

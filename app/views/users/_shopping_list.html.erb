@@ -8,7 +8,7 @@
     <%= f.button :submit, "Update title", class: "btn btn-primary" %>
   <% end %>
 
-  <div class="total-list-price">
+  <div id="total-list-price">
     <h4>
       <%= "Total list price: #{format_price(total_list_price(session[:current_list_id]))}" %>
     </h4>
@@ -44,7 +44,11 @@
 </ol>
 
 <script>
-  $(function() {
-
-  })
+  // to update total price with ajax when stores/quantity change
+  // $(function() {
+  //   $(".shopping-list-item").on("ajax:success", function(event, data) {
+  //     $(".total_list_price").empty();
+  //     $(".total-list-price").append();
+  //   });
+  // })
 </script>
