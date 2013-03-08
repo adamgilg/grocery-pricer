@@ -19,8 +19,8 @@ module ApplicationHelper
       class: "btn btn-success")
   end
 
-  def total_list_price
-    list = ShoppingList.find(session[:current_list_id])
+  def total_list_price(list_id)
+    list = ShoppingList.find(list_id)
     total = 0
     list.user_products.each do |up|
       if up.store_product
@@ -30,9 +30,10 @@ module ApplicationHelper
     total
   end
 
-  def sort_list_by_store(user)
+  def sort_list_by_store
     products_by_store = {}
-    ups = user.user_products.joins(:store_product).order(store_products: :store_id)
+    list = ShoppingList.find(session[:current_list_id])
+    ups = list.user_products.joins(:store_product).order(store_products: :store_id)
     ups.each do |up|
       if products_by_store[up.store_product.store_id]
         products_by_store[up.store_product.store_id] << up
@@ -47,6 +48,7 @@ module ApplicationHelper
     button_to("Email list",
       email_shopping_list_users_path,
       remote: true,
-      method: :post)
+      method: :post,
+      class: "btn btn-primary")
   end
 end

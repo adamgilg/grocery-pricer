@@ -9,6 +9,8 @@
     <%= f.input :title, wrapper_html: { class: "shopping-list-title" } %>
   <% end %>
 
+  <%= button_to "Delete List", shopping_list_path(ShoppingList.find(session[:current_list_id])), method: :delete, data: { confirm: "Are you sure you want to permamently delete this list?" }, class: "btn btn-danger" %>
+
   <% current_list.user_products.each do |item| %>
     <p>
       <%= link_to item.product.name, product_path(item.product) %>

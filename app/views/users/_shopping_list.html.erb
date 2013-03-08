@@ -1,15 +1,22 @@
- <ol>
-  <% current_list = ShoppingList.find(session[:current_list_id]) %>
+<% current_list = ShoppingList.find(session[:current_list_id]) %>
+<%= button_to "Delete List", shopping_list_path(current_list.id), method: :delete, data: { confirm: "Are you sure you want to permamently delete this list?" }, class: "btn btn-danger" %>
 
+ <ol>
   <!-- form for changing title -->
   <%= simple_form_for(current_list, remote: true) do |f| %>
     <%= f.input :title, wrapper_html: { class: "shopping-list-title" } %>
-    <%= f.button :submit, "Update title" %>
+    <%= f.button :submit, "Update title", class: "btn btn-primary" %>
   <% end %>
+
+  <div class="total-list-price">
+    <h4>
+      <%= "Total list price: #{format_price(total_list_price(session[:current_list_id]))}" %>
+    </h4>
+  </div>
 
   <!-- lists products -->
   <% current_list.user_products.each do |user_prod| %>
-    <li>
+    <li class="shopping-list-item">
       <%= user_prod.product.name %>
 
       <!-- form to change item quantity -->
@@ -34,7 +41,10 @@
       <% end %>
     </li>
   <% end %>
-  <%= "Total list price: #{format_price(total_list_price)}" %>
-
-  <%= button_to "Delete List", shopping_list_path(current_list.id), method: :delete %>
 </ol>
+
+<script>
+  $(function() {
+
+  })
+</script>

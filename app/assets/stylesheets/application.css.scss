@@ -37,7 +37,11 @@
   width: 175px;
 }
 
-
+.shopping-list-item {
+  form {
+    margin-bottom: 0px;
+  }
+}
 
 .select-shopping-list select {
   width: 190px;
@@ -121,10 +125,6 @@ body {
 
 textarea {
   height: 125px;
-}
-
-.signin-out {
-  float: right;
 }
 
 #landing-page-content {

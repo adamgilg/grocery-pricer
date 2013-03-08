@@ -18,7 +18,11 @@ class UsersController < ApplicationController
   end
 
   def email_shopping_list
-    UserMailer.email_shopping_list(current_user, sort_list_by_store(@current_user)).deliver
+    UserMailer.email_shopping_list(
+        current_user,
+        sort_list_by_store,
+        session[:current_list_id]
+      ).deliver
     render nothing: true
   end
 end

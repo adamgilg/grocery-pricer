@@ -4,7 +4,7 @@
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
   </head>
   <body>
-    <h1>Shopping List</h1>
+    <h1>List: <%= @list.title %></h1>
     <ol>
       <% @sorted_list.each do |store_id, products| %>
         <li>
@@ -14,7 +14,7 @@
           <ul>
             <% products.each do |product| %>
               <li>
-                <%= product.store_product.product.name %>
+                <%= product.store_product.product.name %> |
                 <%= product.quantity %> at <%= format_price(product.store_product.price) %> each.
               </li>
             <% end %>
@@ -22,6 +22,7 @@
         </li>
       <% end %>
     </ol>
+    Total: <%= format_price(total_list_price(@list.id)) %>
   </body>
 </html>
 
